@@ -28,7 +28,7 @@ namespace Analogy.LogViewer.IISLogsProvider
 
 
 
-    public class AnalogyIISDataProvider : IAnalogyDataProvider
+    public class AnalogyIISDataProvider : IAnalogyOfflineDataProvider
     {
         public string OptionalTitle { get; } = "Analogy IIS Log Parser";
         public Guid ID { get; } = new Guid("44688C02-3156-45B1-B916-08DB96BCD358");
@@ -55,14 +55,14 @@ namespace Analogy.LogViewer.IISLogsProvider
                 catch (Exception)
                 {
                     LogParserSettings = new LogParserSettings();
-                    LogParserSettings.Splitter = "|";
+                    LogParserSettings.Splitter = " ";
                     LogParserSettings.SupportedFilesExtensions = new List<string> { "u_ex*.log" };
                 }
             }
             else
             {
                 LogParserSettings = new LogParserSettings();
-                LogParserSettings.Splitter = "|";
+                LogParserSettings.Splitter = " ";
                 LogParserSettings.SupportedFilesExtensions = new List<string> { "u_ex*.log" };
 
             }
@@ -83,7 +83,7 @@ namespace Analogy.LogViewer.IISLogsProvider
 
         public Task SaveAsync(List<AnalogyLogMessage> messages, string fileName)
         {
-            throw new NotSupportedException("Saving is not supported for nlog");
+            throw new NotSupportedException("Saving is not supported for iis log");
         }
 
         public bool CanOpenFile(string fileName) => LogParserSettings.CanOpenFile(fileName);
