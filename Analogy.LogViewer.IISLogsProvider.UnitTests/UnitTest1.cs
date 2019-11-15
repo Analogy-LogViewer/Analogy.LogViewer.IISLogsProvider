@@ -12,7 +12,8 @@ namespace Analogy.LogViewer.IISLogsProvider.UnitTests
     public class UnitTest1:ILogMessageCreatedHandler
     {
 
-        public bool ForceNoFileCaching { get; } = true;
+        public bool ForceNoFileCaching { get; set; } = true;
+        public bool DoNotAddToRecentHistory { get; set; } = true;
         private LogParserSettings LogParserSettings { get; set; }
         private CancellationTokenSource CancellationTokenSource { get; set; }
         private string filename = @"d:\u_ex190909.log";
