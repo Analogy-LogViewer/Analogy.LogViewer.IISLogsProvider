@@ -198,10 +198,12 @@ namespace Analogy.LogViewer.IISLogsProvider
                             var entry = Parse(items);
                             entry.FileName = fileName;
                             messages.Add(entry);
+                            messagesHandler.AppendMessage(entry, Utils.GetFileNameAsDataSource(fileName));
+
                         }
                     }
                 }
-                messagesHandler.AppendMessages(messages, fileName);
+              
                 return messages;
             }
             catch (Exception e)
