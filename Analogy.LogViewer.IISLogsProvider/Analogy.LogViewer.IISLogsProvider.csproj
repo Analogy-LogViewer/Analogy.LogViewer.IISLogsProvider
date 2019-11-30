@@ -7,7 +7,7 @@
     <ProjectGuid>{7645C65F-4A87-4A0C-BAD5-BA1941E7902C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Analogy.LogViewer.IISLogsProvider</RootNamespace>
-    <AssemblyName>Analogy.Implementation.IISLogsProvider</AssemblyName>
+    <AssemblyName>Analogy.LogViewer.IISLogsProvider</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -61,10 +61,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Analogy.DataProviders.Extensions">
-      <Version>1.0.0.8</Version>
+      <Version>1.0.1</Version>
     </PackageReference>
     <PackageReference Include="Analogy.LogViewer.Interfaces">
-      <Version>2.1.5.2</Version>
+      <Version>2.1.6.1</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>

@@ -31,6 +31,7 @@ namespace Analogy.LogViewer.IISLogsProvider
     public class AnalogyIISDataProvider : IAnalogyOfflineDataProvider
     {
         public string OptionalTitle { get; } = "Analogy IIS Log Parser";
+
         public Guid ID { get; } = new Guid("44688C02-3156-45B1-B916-08DB96BCD358");
 
         public bool CanSaveToLogFile { get; } = false;
@@ -43,9 +44,8 @@ namespace Analogy.LogViewer.IISLogsProvider
         private IISFileParser IISFileParser { get; set; }
         private string NLogFileSetting { get; } = "AnalogyIISSettings.json";
 
-        public void InitDataProvider()
+        public Task InitializeDataProviderAsync()
         {
-
             if (File.Exists(NLogFileSetting))
             {
                 try
@@ -67,7 +67,14 @@ namespace Analogy.LogViewer.IISLogsProvider
 
             }
             IISFileParser = new IISFileParser(LogParserSettings);
+            return Task.CompletedTask;
         }
+
+        public void MessageOpened(AnalogyLogMessage message)
+        {
+            //do nothing
+        }
+
 
 
         public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)

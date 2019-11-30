@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analogy.LogViewer.IISLogsPr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analogy.LogViewer.IISLogsProvider.UnitTests", "Analogy.LogViewer.IISLogsProvider.UnitTests\Analogy.LogViewer.IISLogsProvider.UnitTests.csproj", "{C9CF5E60-AD3D-48DE-A7A2-7F3F33A40BF1}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analogy.LogViewer.IISLogsProvider.Core", "Analogy.LogViewer.IISLogsProvider.Core\Analogy.LogViewer.IISLogsProvider.Core.csproj", "{B8F29F59-1054-4E71-BAC3-78382F37B9A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C9CF5E60-AD3D-48DE-A7A2-7F3F33A40BF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9CF5E60-AD3D-48DE-A7A2-7F3F33A40BF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9CF5E60-AD3D-48DE-A7A2-7F3F33A40BF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8F29F59-1054-4E71-BAC3-78382F37B9A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8F29F59-1054-4E71-BAC3-78382F37B9A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8F29F59-1054-4E71-BAC3-78382F37B9A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8F29F59-1054-4E71-BAC3-78382F37B9A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
