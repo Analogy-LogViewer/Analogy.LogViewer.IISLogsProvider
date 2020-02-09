@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="Analogy.DataProviders.Extensions" Version="1.0.3" />
-    <PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.1.7.1" />
+    <PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.1.7.3" />
   </ItemGroup>
 
 </Project>
