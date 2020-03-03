@@ -40,7 +40,7 @@ namespace Analogy.LogViewer.IISLogsProvider
         public string FileSaveDialogFilters { get; } = string.Empty;
         public IEnumerable<string> SupportFormats { get; } = new[] { "u_ex*.log" };
         public string InitialFolderFullPath { get; } = Environment.CurrentDirectory;
-
+        public bool DisableFilePoolingOption { get; } = false;
         private ILogParserSettings LogParserSettings { get; set; }
         private IISFileParser IISFileParser { get; set; }
         private string NLogFileSetting { get; } = "AnalogyIISSettings.json";
@@ -97,6 +97,7 @@ namespace Analogy.LogViewer.IISLogsProvider
         public bool CanOpenFile(string fileName) => LogParserSettings.CanOpenFile(fileName);
 
         public bool CanOpenAllFiles(IEnumerable<string> fileNames) => fileNames.All(CanOpenFile);
+        
 
         public static List<FileInfo> GetSupportedFilesInternal(DirectoryInfo dirInfo, bool recursive)
         {
