@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
@@ -12,8 +12,8 @@
     <StartupObject />
     <AssemblyName>Analogy.LogViewer.IISLogsProvider</AssemblyName>
     <RootNamespace>Analogy.LogViewer.IISLogsProvider</RootNamespace>
-    <Version>1.1.0</Version>
-    <Copyright>Lior Banai 2020</Copyright>
+    <Version>1.1.0.1</Version>
+    <Copyright>Lior Banai ©  2020</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.IISLogsProvider</PackageProjectUrl>
@@ -35,6 +35,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>

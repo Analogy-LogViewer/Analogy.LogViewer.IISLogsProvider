@@ -1,15 +1,14 @@
-﻿using System;
+﻿using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
+using Analogy.Interfaces.Factories;
+using Analogy.LogViewer.IISLogsProvider.Managers;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Analogy.DataProviders.Extensions;
-using Analogy.Interfaces;
-using Analogy.Interfaces.DataTypes;
-using Analogy.Interfaces.Factories;
-using Newtonsoft.Json;
 
 namespace Analogy.LogViewer.IISLogsProvider
 {
@@ -47,6 +46,7 @@ namespace Analogy.LogViewer.IISLogsProvider
 
         public Task InitializeDataProviderAsync(IAnalogyLogger logger)
         {
+            LogManager.Instance.SetLogger(logger);
             if (File.Exists(NLogFileSetting))
             {
                 try
@@ -97,7 +97,6 @@ namespace Analogy.LogViewer.IISLogsProvider
         public bool CanOpenFile(string fileName) => LogParserSettings.CanOpenFile(fileName);
 
         public bool CanOpenAllFiles(IEnumerable<string> fileNames) => fileNames.All(CanOpenFile);
-        
 
         public static List<FileInfo> GetSupportedFilesInternal(DirectoryInfo dirInfo, bool recursive)
         {

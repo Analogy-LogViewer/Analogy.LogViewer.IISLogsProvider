@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analogy.LogViewer.IISLogsProvider", "Analogy.LogViewer.IISLogsProvider\Analogy.LogViewer.IISLogsProvider.csproj", "{7645C65F-4A87-4A0C-BAD5-BA1941E7902C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analogy.LogViewer.IISLogsProvider.UnitTests", "Analogy.LogViewer.IISLogsProvider.UnitTests\Analogy.LogViewer.IISLogsProvider.UnitTests.csproj", "{C9CF5E60-AD3D-48DE-A7A2-7F3F33A40BF1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analogy.LogViewer.IISLogsProvider.Core", "Analogy.LogViewer.IISLogsProvider.Core\Analogy.LogViewer.IISLogsProvider.Core.csproj", "{B8F29F59-1054-4E71-BAC3-78382F37B9A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analogy.LogViewer.IISLogsProvider", "Analogy.LogViewer.IISLogsProvider.Core\Analogy.LogViewer.IISLogsProvider.csproj", "{B8F29F59-1054-4E71-BAC3-78382F37B9A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7645C65F-4A87-4A0C-BAD5-BA1941E7902C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7645C65F-4A87-4A0C-BAD5-BA1941E7902C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7645C65F-4A87-4A0C-BAD5-BA1941E7902C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7645C65F-4A87-4A0C-BAD5-BA1941E7902C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C9CF5E60-AD3D-48DE-A7A2-7F3F33A40BF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C9CF5E60-AD3D-48DE-A7A2-7F3F33A40BF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9CF5E60-AD3D-48DE-A7A2-7F3F33A40BF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
