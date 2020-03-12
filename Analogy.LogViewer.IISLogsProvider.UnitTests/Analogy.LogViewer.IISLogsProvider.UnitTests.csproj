@@ -60,8 +60,8 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Analogy.LogViewer.IISLogsProvider.Core\Analogy.LogViewer.IISLogsProvider.csproj">
-      <Project>{b8f29f59-1054-4e71-bac3-78382f37b9a5}</Project>
+    <ProjectReference Include="..\Analogy.LogViewer.IISLogsProvider\Analogy.LogViewer.IISLogsProvider.csproj">
+      <Project>{1113a28e-c7fd-4d5f-9145-dc3c232d2eec}</Project>
       <Name>Analogy.LogViewer.IISLogsProvider</Name>
     </ProjectReference>
   </ItemGroup>
