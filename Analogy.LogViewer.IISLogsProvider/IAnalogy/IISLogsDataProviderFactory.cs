@@ -100,9 +100,7 @@ namespace Analogy.LogViewer.IISLogsProvider
 
         public static List<FileInfo> GetSupportedFilesInternal(DirectoryInfo dirInfo, bool recursive)
         {
-            List<FileInfo> files = dirInfo.GetFiles("u_ex*.log")
-                    .Concat(dirInfo.GetFiles("u_ex*.log"))
-                    .ToList();
+            List<FileInfo> files = dirInfo.GetFiles("u_ex*.log").ToList();
             if (!recursive)
                 return files;
             try
