@@ -5,10 +5,12 @@ using Analogy.LogViewer.IISLogsProvider.Managers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Analogy.LogViewer.IISLogsProvider
 {
@@ -25,8 +27,6 @@ namespace Analogy.LogViewer.IISLogsProvider
             Items = items;
         }
     }
-
-
 
     public class AnalogyIISDataProvider : IAnalogyOfflineDataProvider
     {
@@ -119,6 +119,20 @@ namespace Analogy.LogViewer.IISLogsProvider
 
             return files;
         }
+    }
+
+    public class AnalogyIISUserSettings //: IAnalogyDataProviderSettings
+    {
+        public Task SaveSettingsAsync()
+        {
+            return Task.CompletedTask;
+        }
+
+        public string Title { get; } = "IIS Parser Settings";
+        public UserControl DataProviderSettings { get; } = new IISUserSettingsUC();
+        public Image SmallImage { get; } = Properties.Resources.AnalogyIIS16x16;
+        public Image LargeImage { get; } = Properties.Resources.AnalogyIIS32x32;
+        public Guid FactoryId { get; set; } = IISLogFactory.AnalogyIISFactoryGuid;
     }
 
 }
