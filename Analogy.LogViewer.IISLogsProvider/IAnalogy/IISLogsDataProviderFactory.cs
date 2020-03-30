@@ -16,16 +16,12 @@ namespace Analogy.LogViewer.IISLogsProvider
 {
     public class IISLogsDataProviderFactory : IAnalogyDataProvidersFactory
     {
+        public Guid FactoryId { get; } = IISLogFactory.AnalogyIISFactoryGuid;
         public string Title { get; } = "Analogy IIS Logs Data Provider";
-        public IEnumerable<IAnalogyDataProvider> Items { get; }
 
-        public IISLogsDataProviderFactory()
-        {
-            var items = new List<IAnalogyDataProvider>();
-            var iis = new AnalogyIISDataProvider();
-            items.Add(iis);
-            Items = items;
-        }
+        public IEnumerable<IAnalogyDataProvider> DataProviders { get; } =
+            new List<IAnalogyDataProvider> { new AnalogyIISDataProvider() };
+
     }
 
     public class AnalogyIISDataProvider : IAnalogyOfflineDataProvider
