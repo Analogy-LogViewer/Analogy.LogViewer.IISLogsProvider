@@ -39,6 +39,12 @@ namespace Analogy.LogViewer.IISLogsProvider
         private ILogParserSettings LogParserSettings { get; set; }
         private IISFileParser IISFileParser { get; set; }
         private string NLogFileSetting { get; } = "AnalogyIISSettings.json";
+        public bool UseCustomColors { get; set; } = false;
+        public IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
+            => Array.Empty<(string, string)>();
+
+        public (Color backgroundColor, Color foregroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
+            => (Color.Empty, Color.Empty);
 
         public Task InitializeDataProviderAsync(IAnalogyLogger logger)
         {
