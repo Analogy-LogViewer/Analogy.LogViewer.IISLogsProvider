@@ -71,6 +71,7 @@ namespace Analogy.LogViewer.IISLogsProvider
                     {
                         m.Text += val == "-" ? string.Empty : $"Client ip: {val + Environment.NewLine}";
                         m.Source += $"Client ip: {val}.";
+                        m.AdditionalInformation.Add("c-ip",$"Client ip: {val}.");
                     }
                 },
                 {"cs-username",  (val,m)=>
@@ -81,21 +82,43 @@ namespace Analogy.LogViewer.IISLogsProvider
                         m.User = val;
                     }
                 },
-                {"s-sitename",  (val,m)=>m.Text +=val=="-" ?string.Empty : $"{Mapping["s-sitename"].value}: {val+Environment.NewLine}"},
-                {"s-computername",  (val,m)=>m.Text +=val=="-" ?string.Empty : $"{Mapping["s-computername"].value}: {val+Environment.NewLine}"},
+                {"s-sitename",  (val,m)=>
+                    {
+                        m.Text += val == "-"
+                            ? string.Empty
+                            : $"{Mapping["s-sitename"].value}: {val + Environment.NewLine}";
+                        m.AdditionalInformation.Add("s-sitename",val);
+                    }
+                },
+                {"s-computername",  (val,m)=>
+                    {
+                        
+                        m.Text += val == "-"
+                            ? string.Empty
+                            : $"{Mapping["s-computername"].value}: {val + Environment.NewLine}";
+                        m.AdditionalInformation.Add("s-computername",val);
+                    }
+                },
                 {"s-ip",   (val,m)=>
                     {
                         m.Text += val == "-" ? string.Empty : $"{Mapping["s-ip"].value}: {val + Environment.NewLine}";
                         m.Source += $"Server ip: {val}.";
+                        m.AdditionalInformation.Add("s-ip",$"Server ip: {val}.");
                     }
                 },
-                {"s-port",   (val,m)=>m.Text +=val=="-" ?string.Empty : $"{Mapping["s-port"].value}: {val+Environment.NewLine}"},
+                {"s-port",   (val,m)=>
+                    {
+                        m.Text += val == "-" ? string.Empty : $"{Mapping["s-port"].value}: {val + Environment.NewLine}";
+                        m.AdditionalInformation.Add("s-port",val);
+                    }
+                },
                 {"cs-method",   (val,m)=>
                     {
                         m.Text += val == "-"
                             ? string.Empty
                             : $"{Mapping["cs-method"].value}: {val + Environment.NewLine}";
                         m.Category = val;
+                        m.AdditionalInformation.Add("cs-method",val);
                     }
                 },
                 {"cs-uri-stem",   (val,m)=>
@@ -104,11 +127,21 @@ namespace Analogy.LogViewer.IISLogsProvider
                             ? string.Empty
                             : $"{Mapping["cs-uri-stem"].value}: {val + Environment.NewLine}";
                         m.MethodName = val;
+                        m.AdditionalInformation.Add("cs-uri-stem",val);
                     }
                 },
-                {"cs-uri-query",   (val,m)=>m.Text +=val=="-" ?string.Empty : $"{Mapping["cs-uri-query"].value}: {val+Environment.NewLine}"},
+                {"cs-uri-query",   (val,m)=>
+                    {
+                        
+                        m.Text += val == "-"
+                            ? string.Empty
+                            : $"{Mapping["cs-uri-query"].value}: {val + Environment.NewLine}";
+                        m.AdditionalInformation.Add("cs-uri-query",val);
+                    }
+                },
                 {"sc-status",   (val,m)=>
                     {
+                        m.AdditionalInformation.Add("sc-status",val);
                         m.Text += val == "-"
                             ? string.Empty
                             : $"{Mapping["sc-status"].value}: {val + Environment.NewLine}";
@@ -127,23 +160,87 @@ namespace Analogy.LogViewer.IISLogsProvider
                         }
                     }
                 },
-                {"sc-win32-status",   (val,m)=>m.Text +=val=="-" ?string.Empty : $"{Mapping["sc-win32-status"].value}: {val+Environment.NewLine}"},
-                {"sc-bytes",   (val,m)=>m.Text +=val=="-" ?string.Empty : $"{Mapping["sc-bytes"].value}: {val+Environment.NewLine}"},
-                {"cs-bytes",   (val,m)=>m.Text +=val=="-" ?string.Empty : $"{Mapping["cs-bytes"].value}: {val+Environment.NewLine}"},
-                {"time-taken",   (val,m)=>m.Text +=val=="-" ?string.Empty : $"{Mapping["time-taken"].value}: {val+Environment.NewLine}"},
-                {"cs-version",  (val,m)=>m.Text +=val=="-" ?string.Empty : $"{Mapping["cs-version"].value}: {val+Environment.NewLine}"},
-                {"cs-host",  (val,m)=>m.Text +=val=="-" ?string.Empty : $"{Mapping["cs-host"].value}: {val+Environment.NewLine}"},
-                {"cs(User-Agent)",   (val,m)=>m.Text +=val=="-" ?string.Empty : $"{Mapping["cs(User-Agent)"].value}: {val+Environment.NewLine}"},
-                {"cs(Cookie)",   (val,m)=>m.Text +=val=="-" ?string.Empty : $"{Mapping["cs(Cookie)"].value}: {val+Environment.NewLine}"},
+                {"sc-win32-status",   (val,m)=>
+                    {
+                        m.AdditionalInformation.Add("sc-win32-status",val);
+                        m.Text += val == "-"
+                            ? string.Empty
+                            : $"{Mapping["sc-win32-status"].value}: {val + Environment.NewLine}";
+                    }
+                },
+                {"sc-bytes",   (val,m)=>
+                    {
+                        m.AdditionalInformation.Add("sc-bytes",val);
+                        m.Text += val == "-"
+                            ? string.Empty
+                            : $"{Mapping["sc-bytes"].value}: {val + Environment.NewLine}";
+                    }
+                },
+                {"cs-bytes",   (val,m)=>
+                    {
+                        m.AdditionalInformation.Add("cs-bytes",val);
+                        m.Text += val == "-"
+                            ? string.Empty
+                            : $"{Mapping["cs-bytes"].value}: {val + Environment.NewLine}";
+                    }
+                },
+                {"time-taken",   (val,m)=>
+                    {
+                        m.AdditionalInformation.Add("time-taken",val);
+                        m.Text += val == "-"
+                            ? string.Empty
+                            : $"{Mapping["time-taken"].value}: {val + Environment.NewLine}";
+                    }
+                },
+                {"cs-version",  (val,m)=>
+                    {
+                        m.AdditionalInformation.Add("cs-version",val);
+                        m.Text += val == "-"
+                            ? string.Empty
+                            : $"{Mapping["cs-version"].value}: {val + Environment.NewLine}";
+                    }
+                },
+                {"cs-host",  (val,m)=>
+                    {
+                        m.AdditionalInformation.Add("cs-host",val);
+                        m.Text += val == "-"
+                            ? string.Empty
+                            : $"{Mapping["cs-host"].value}: {val + Environment.NewLine}";
+                    }
+                },
+                {"cs(User-Agent)",   (val,m)=>
+                    {
+                        m.AdditionalInformation.Add("cs(User-Agent)",val);
+                        m.Text += val == "-"
+                            ? string.Empty
+                            : $"{Mapping["cs(User-Agent)"].value}: {val + Environment.NewLine}";
+                    }
+                },
+                {"cs(Cookie)",   (val,m)=>
+                    {
+                        m.AdditionalInformation.Add("cs(Cookie)",val);
+                        m.Text += val == "-"
+                            ? string.Empty
+                            : $"{Mapping["cs(Cookie)"].value}: {val + Environment.NewLine}";
+                    }
+                },
                 {"cs(Referer)",   (val,m)=>
                     {
+                        m.AdditionalInformation.Add("cs(Referer)",val);
                         m.Text += val == "-"
                             ? string.Empty
                             : $"{Mapping["cs(Referer)"].value}: {val + Environment.NewLine}";
                         m.Module =val;
                     }
                 },
-                {"sc-substatus",   (val,m)=>m.Text +=val=="-" ?string.Empty : $"{Mapping["sc-substatus"].value}: {val+Environment.NewLine}"}
+                {"sc-substatus",   (val,m)=>
+                    {
+                        m.AdditionalInformation.Add("sc-substatus",val);
+                        m.Text += val == "-"
+                            ? string.Empty
+                            : $"{Mapping["sc-substatus"].value}: {val + Environment.NewLine}";
+                    }
+                }
                 };
 
 
@@ -238,6 +335,7 @@ namespace Analogy.LogViewer.IISLogsProvider
         private AnalogyLogMessage Parse(string[] items)
         {
             AnalogyLogMessage m = new AnalogyLogMessage();
+            m.AdditionalInformation=new Dictionary<string, string>();
             for (var index = 0; index < items.Length; index++)
             {
                 string value = items[index];
