@@ -65,6 +65,11 @@
       <Name>Analogy.LogViewer.IISLogsProvider</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="u_ex_Test.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

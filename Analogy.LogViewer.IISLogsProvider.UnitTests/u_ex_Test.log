@@ -1,0 +1,20 @@
+#Software: Microsoft Internet Information Services 10.0
+#Version: 1.0
+#Date: 2020-06-15 11:41:36
+#Fields: date time s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) cs(Referer) sc-status sc-substatus sc-win32-status time-taken
+2020-06-15 11:41:36 127.0.0.1 POST /PortalAdminService/AccessControlService.svc - 80 - 127.0.0.1 - - 404 0 0 859
+2020-06-15 11:41:36 127.0.0.1 POST /PortalAdminService/AccessControlService.svc/mex - 80 - 127.0.0.1 - - 404 0 0 891
+2020-06-15 11:41:36 127.0.0.1 GET /PortalAdminService/AccessControlService.svc/$metadata - 80 - 127.0.0.1 Mozilla/4.0+(compatible;+MSIE+6.0;+MS+Web+Services+Client+Protocol+4.0.30319.42000) - 404 0 0 1179
+2020-06-15 11:41:36 127.0.0.1 GET /PortalAdminService/AccessControlService.svc - 80 - 127.0.0.1 Mozilla/4.0+(compatible;+MSIE+6.0;+MS+Web+Services+Client+Protocol+4.0.30319.42000) - 404 0 0 1155
+2020-06-15 11:41:41 127.0.0.1 GET /PortalAdminService/AdministrationService.svc - 80 - 127.0.0.1 Mozilla/4.0+(compatible;+MSIE+6.0;+MS+Web+Services+Client+Protocol+4.0.30319.42000) - 404 0 0 5
+2020-06-15 11:41:41 127.0.0.1 GET /PortalAdminService/AdministrationService.svc/$metadata - 80 - 127.0.0.1 Mozilla/4.0+(compatible;+MSIE+6.0;+MS+Web+Services+Client+Protocol+4.0.30319.42000) - 404 0 0 7
+2020-06-15 11:41:41 127.0.0.1 POST /PortalAdminService/AdministrationService.svc/mex - 80 - 127.0.0.1 - - 404 0 0 0
+2020-06-15 11:41:41 127.0.0.1 POST /PortalAdminService/AdministrationService.svc - 80 - 127.0.0.1 - - 404 0 0 0
+2020-06-15 11:56:35 127.0.0.1 GET /PortalAdminService/UserDatabaseService.svc - 80 - 127.0.0.1 Mozilla/4.0+(compatible;+MSIE+6.0;+MS+Web+Services+Client+Protocol+4.0.30319.42000) - 404 0 0 7
+2020-06-15 11:56:35 127.0.0.1 POST /PortalAdminService/UserDatabaseService.svc/mex - 80 - 127.0.0.1 - - 404 0 0 1
+2020-06-15 11:56:35 127.0.0.1 POST /PortalAdminService/UserDatabaseService.svc - 80 - 127.0.0.1 - - 404 0 0 1
+2020-06-15 11:56:35 127.0.0.1 GET /PortalAdminService/UserDatabaseService.svc/$metadata - 80 - 127.0.0.1 Mozilla/4.0+(compatible;+MSIE+6.0;+MS+Web+Services+Client+Protocol+4.0.30319.42000) - 404 0 0 10
+2020-06-15 12:16:49 127.0.0.1 GET /PortalAdminService/UserDatabaseService.svc/$metadata - 80 - 127.0.0.1 Mozilla/4.0+(compatible;+MSIE+6.0;+MS+Web+Services+Client+Protocol+4.0.30319.42000) - 404 0 0 11
+2020-06-15 12:16:49 127.0.0.1 GET /PortalAdminService/UserDatabaseService.svc - 80 - 127.0.0.1 Mozilla/4.0+(compatible;+MSIE+6.0;+MS+Web+Services+Client+Protocol+4.0.30319.42000) - 404 0 0 6
+2020-06-15 12:16:49 127.0.0.1 POST /PortalAdminService/UserDatabaseService.svc/mex - 80 - 127.0.0.1 - - 404 0 0 0
+2020-06-15 12:16:49 127.0.0.1 POST /PortalAdminService/UserDatabaseService.svc - 80 - 127.0.0.1 - - 404 0 0 0
