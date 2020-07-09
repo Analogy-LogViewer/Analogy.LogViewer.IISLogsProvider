@@ -7,7 +7,7 @@ namespace Analogy.LogViewer.IISLogsProvider
 {
     public class IISLogFactory : IAnalogyFactory
     {
-        public static Guid AnalogyIISFactoryGuid { get; } = new Guid("AD7187B1-BD09-4BFE-A28B-3FD3DE879009");
+        internal static Guid AnalogyIISFactoryGuid { get; } = new Guid("AD7187B1-BD09-4BFE-A28B-3FD3DE879009");
         public Guid FactoryId { get; } = AnalogyIISFactoryGuid;
         public string Title { get; } = "IIS Parser";
         public IEnumerable<IAnalogyChangeLog> ChangeLog => IISLogsProvider.ChangeLog.GetChangeLog();
