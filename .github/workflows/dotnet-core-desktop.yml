@@ -56,7 +56,7 @@ jobs:
     - name: 'Publish Artifacts'   
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: 'artifacts'
+        name: 'artifactory'
         path: ./Analogy.LogViewer.IISLogsProvider/bin/${{ matrix.configuration }}
   push-nuget:
     name: 'Push NuGet Packages'
@@ -69,7 +69,7 @@ jobs:
           name: 'artifactory'
       - name: 'Dotnet NuGet Push'
         run: |
-          Get-ChildItem .\artifacts -Filter *.nupkg |
+          Get-ChildItem .\artifactory -Filter *.nupkg |
           Where-Object { !$_.Name.Contains('preview') } |
           ForEach-Object { dotnet nuget push $_ --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{secrets.NUGET_API_KEY}} }
         shell: pwsh
