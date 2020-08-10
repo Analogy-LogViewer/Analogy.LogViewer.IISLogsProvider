@@ -17,11 +17,11 @@ namespace Analogy.LogViewer.IISLogsProvider
         private ILogParserSettings _logFileSettings;
         private Dictionary<int, string> columnIndexToName;
         private const string fieldHeader = "#Fields:";
-        private string[] splitters;
+        private string[] splitters = new[] { " " };
         public IISFileParser(ILogParserSettings logParserSettings)
         {
             _logFileSettings = logParserSettings;
-            splitters = new[] { logParserSettings.Splitter };
+
             Mapping = new Dictionary<string, (string value, string description)>
             {
                 {"date", ("Date", "The date on which the activity occurred")},
@@ -92,7 +92,7 @@ namespace Analogy.LogViewer.IISLogsProvider
                 },
                 {"s-computername",  (val,m)=>
                     {
-                        
+
                         m.Text += val == "-"
                             ? string.Empty
                             : $"{Mapping["s-computername"].value}: {val + Environment.NewLine}";
@@ -132,7 +132,7 @@ namespace Analogy.LogViewer.IISLogsProvider
                 },
                 {"cs-uri-query",   (val,m)=>
                     {
-                        
+
                         m.Text += val == "-"
                             ? string.Empty
                             : $"{Mapping["cs-uri-query"].value}: {val + Environment.NewLine}";
@@ -300,7 +300,7 @@ namespace Analogy.LogViewer.IISLogsProvider
                         }
                     }
                 }
-              
+
                 return messages;
             }
             catch (Exception e)
@@ -335,7 +335,7 @@ namespace Analogy.LogViewer.IISLogsProvider
         private AnalogyLogMessage Parse(string[] items)
         {
             AnalogyLogMessage m = new AnalogyLogMessage();
-            m.AdditionalInformation=new Dictionary<string, string>();
+            m.AdditionalInformation = new Dictionary<string, string>();
             for (var index = 0; index < items.Length; index++)
             {
                 string value = items[index];

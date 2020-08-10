@@ -58,14 +58,14 @@ namespace Analogy.LogViewer.IISLogsProvider
                 catch (Exception)
                 {
                     LogParserSettings = new LogParserSettings();
-                    LogParserSettings.Splitter = " ";
+                    LogParserSettings.IsConfigured = true;
                     LogParserSettings.SupportedFilesExtensions = new List<string> { "u_ex*.log" };
                 }
             }
             else
             {
                 LogParserSettings = new LogParserSettings();
-                LogParserSettings.Splitter = " ";
+                LogParserSettings.IsConfigured = true;
                 LogParserSettings.SupportedFilesExtensions = new List<string> { "u_ex*.log" };
 
             }
