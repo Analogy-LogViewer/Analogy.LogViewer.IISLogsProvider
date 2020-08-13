@@ -1,4 +1,4 @@
-# Analogy IIS Logs Parser    <img src="./Assets/AnalogyIIS.png" align="right" width="155px" height="155px">
+# Analogy IIS Logs Parser  [![Nuget Downloads](https://img.shields.io/nuget/dt/Analogy.LogViewer.IISLogsProvider)](https://www.nuget.org/packages/Analogy.LogViewer.IISLogsProvider/)   <img src="./Assets/AnalogyIIS.png" align="right" width="155px" height="155px">
 
 <p align="center">
     
@@ -16,7 +16,6 @@
     <img src="https://img.shields.io/github/v/release/Analogy-LogViewer/Analogy.LogViewer.IISLogsProvider"  alt="Latest Release" />
 </a>
 [![Nuget](https://img.shields.io/nuget/v/Analogy.LogViewer.IISLogsProvider)](https://www.nuget.org/packages/Analogy.LogViewer.IISLogsProvider/)
-[![Nuget Downloads](https://img.shields.io/nuget/dt/Analogy.LogViewer.IISLogsProvider)](https://www.nuget.org/packages/Analogy.LogViewer.IISLogsProvider/)
 <a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.IISLogsProvider/compare/V0.1.0...master">
     <img src="https://img.shields.io/github/commits-since/Analogy-LogViewer/Analogy.LogViewer.IISLogsProvider/latest"  alt="Commits Since Latest Release"/>
 </a>
