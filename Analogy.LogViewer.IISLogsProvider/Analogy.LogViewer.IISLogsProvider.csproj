@@ -12,7 +12,7 @@
 		<StartupObject />
 		<AssemblyName>Analogy.LogViewer.IISLogsProvider</AssemblyName>
 		<RootNamespace>Analogy.LogViewer.IISLogsProvider</RootNamespace>
-		<Version>1.3.0</Version>
+		<Version>1.3.1</Version>
 		<Copyright>Lior Banai © 2020</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -22,7 +22,7 @@
 		<PackageIcon>icon.jpg</PackageIcon>
 		<PackageIconUrl />
 		<Authors>Lior Banai</Authors>
-		<AssemblyVersion>1.3.0.0</AssemblyVersion>
+		<AssemblyVersion>1.3.1.0</AssemblyVersion>
 		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 		<Company>Analogy.LogViewer</Company>
 	</PropertyGroup>

@@ -28,8 +28,9 @@ namespace Analogy.LogViewer.IISLogsProvider
     {
         public string OptionalTitle { get; } = "Analogy IIS Log Parser";
 
-        public Guid ID { get; } = new Guid("44688C02-3156-45B1-B916-08DB96BCD358");
-
+        public Guid Id { get; } = new Guid("44688C02-3156-45B1-B916-08DB96BCD358");
+        public Image LargeImage => null;
+        public Image SmallImage => null;
         public bool CanSaveToLogFile { get; } = false;
         public string FileOpenDialogFilters { get; } = "IIS log files|u_ex*.log";
         public string FileSaveDialogFilters { get; } = string.Empty;
