@@ -16,8 +16,8 @@ namespace Analogy.LogViewer.IISLogsProvider
 {
     public class IISLogsDataProviderFactory : IAnalogyDataProvidersFactory
     {
-        public Guid FactoryId { get; } = IISLogFactory.AnalogyIISFactoryGuid;
-        public string Title { get; } = "Analogy IIS Logs Data Provider";
+        public Guid FactoryId { get; set; } = IISLogFactory.AnalogyIISFactoryGuid;
+        public string Title { get; set; } = "Analogy IIS Logs Data Provider";
 
         public IEnumerable<IAnalogyDataProvider> DataProviders { get; } =
             new List<IAnalogyDataProvider> { new AnalogyIISDataProvider() };
@@ -26,11 +26,11 @@ namespace Analogy.LogViewer.IISLogsProvider
 
     public class AnalogyIISDataProvider : IAnalogyOfflineDataProvider
     {
-        public string OptionalTitle { get; } = "Analogy IIS Log Parser";
+        public string OptionalTitle { get; set; } = "Analogy IIS Log Parser";
 
-        public Guid Id { get; } = new Guid("44688C02-3156-45B1-B916-08DB96BCD358");
-        public Image LargeImage => null;
-        public Image SmallImage => null;
+        public Guid Id { get; set; } = new Guid("44688C02-3156-45B1-B916-08DB96BCD358");
+        public Image LargeImage { get; set; } = null;
+        public Image SmallImage { get; set; } = null;
         public bool CanSaveToLogFile { get; } = false;
         public string FileOpenDialogFilters { get; } = "IIS log files|u_ex*.log";
         public string FileSaveDialogFilters { get; } = string.Empty;
