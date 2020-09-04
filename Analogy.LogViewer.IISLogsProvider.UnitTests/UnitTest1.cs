@@ -2,6 +2,7 @@
 using Analogy.Interfaces.DataTypes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,19 +17,19 @@ namespace Analogy.LogViewer.IISLogsProvider.UnitTests
         private LogParserSettings LogParserSettings { get; set; }
         private CancellationTokenSource CancellationTokenSource { get; set; }
         private string filename = "u_ex_Test.log";
-        private List<AnalogyLogMessage> messages;
+        private List<AnalogyLogMessage> messages = new List<AnalogyLogMessage>();
         [TestMethod]
         public async Task TestMethod1()
         {
+            messages.Clear();
             CancellationTokenSource = new CancellationTokenSource();
-            messages = new List<AnalogyLogMessage>();
             LogParserSettings = new LogParserSettings();
-            LogParserSettings.Splitter = " ";
             LogParserSettings.IsConfigured = true;
             LogParserSettings.SupportedFilesExtensions = new List<string> { "u_ex*.log" };
             IISFileParser p = new IISFileParser(LogParserSettings);
 
-            await p.Process(filename, CancellationTokenSource.Token, this);
+            var allMessages = (await p.Process(filename, CancellationTokenSource.Token, this)).ToList();
+            Assert.IsTrue(allMessages.Count == 20 && allMessages.Count == messages.Count);
         }
 
         public void AppendMessage(AnalogyLogMessage message, string dataSource)
