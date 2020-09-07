@@ -2,6 +2,8 @@
 using Analogy.Interfaces.Factories;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using Analogy.LogViewer.IISLogsProvider.Properties;
 
 namespace Analogy.LogViewer.IISLogsProvider
 {
@@ -13,6 +15,8 @@ namespace Analogy.LogViewer.IISLogsProvider
         public IEnumerable<IAnalogyChangeLog> ChangeLog { get; set; } = IISLogsProvider.ChangeLog.GetChangeLog();
         public IEnumerable<string> Contributors { get; set; } = new List<string> { "Lior Banai" };
         public string About { get; set; } = "Analogy IIS Parser";
+        public Image LargeImage { get; set; } = Resources.AnalogyIIS32x32;
+        public Image SmallImage { get; set; } = Resources.AnalogyIIS16x16;
     }
 
     public class AnalogyIISLogCustomActionFactory : IAnalogyCustomActionsFactory
