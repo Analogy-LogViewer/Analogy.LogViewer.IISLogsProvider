@@ -149,9 +149,9 @@ namespace Analogy.LogViewer.IISLogsProvider
                             if (status >= 100 && status <= 199)
                                 m.Level = AnalogyLogLevel.Debug;
                             if (status >= 200 && status <= 299)
-                                m.Level = AnalogyLogLevel.Event;
+                                m.Level = AnalogyLogLevel.Information;
                             if (status >= 300 && status <= 399)
-                                m.Level = AnalogyLogLevel.Event;
+                                m.Level = AnalogyLogLevel.Information;
                             if (status >= 400 && status <= 499)
                                 m.Level = AnalogyLogLevel.Error;
                             if (status >= 500 && status <= 599)
@@ -317,7 +317,7 @@ namespace Analogy.LogViewer.IISLogsProvider
 
         private AnalogyLogMessage HandleHeaderMessage(string line, string filename)
         {
-            var m = new AnalogyLogMessage("Header: " + line, AnalogyLogLevel.Event, AnalogyLogClass.General, filename,
+            var m = new AnalogyLogMessage("Header: " + line, AnalogyLogLevel.Information, AnalogyLogClass.General, filename,
                 "", "IIS");
             m.Date = DateTime.MinValue;
 
