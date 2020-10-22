@@ -14,47 +14,37 @@ using System.Windows.Forms;
 
 namespace Analogy.LogViewer.IISLogsProvider
 {
-    public class IISLogsDataProviderFactory : IAnalogyDataProvidersFactory
+    public class IISLogsDataProviderFactory : LogViewer.Template.DataProvidersFactory
     {
-        public Guid FactoryId { get; set; } = IISLogFactory.AnalogyIISFactoryGuid;
-        public string Title { get; set; } = "Analogy IIS Logs Data Provider";
+        public override Guid FactoryId { get; set; } = IISLogFactory.AnalogyIISFactoryGuid;
+        public override string Title { get; set; } = "IIS Logs Data Provider";
 
-        public IEnumerable<IAnalogyDataProvider> DataProviders { get; } =
-            new List<IAnalogyDataProvider> { new AnalogyIISDataProvider() };
+        public override IEnumerable<IAnalogyDataProvider> DataProviders { get; set; } = new List<IAnalogyDataProvider> { new AnalogyIISDataProvider() };
 
     }
 
-    public class AnalogyIISDataProvider : IAnalogyOfflineDataProvider
+    public class AnalogyIISDataProvider : Analogy.LogViewer.Template.OfflineDataProvider
     {
-        public string OptionalTitle { get; set; } = "Analogy IIS Log Parser";
+        public override string? OptionalTitle { get; set; } = "Analogy IIS Log Parser";
 
-        public Guid Id { get; set; } = new Guid("44688C02-3156-45B1-B916-08DB96BCD358");
-        public Image LargeImage { get; set; } = null;
-        public Image SmallImage { get; set; } = null;
-        public bool CanSaveToLogFile { get; } = false;
-        public string FileOpenDialogFilters { get; } = "IIS log files|u_ex*.log";
-        public string FileSaveDialogFilters { get; } = string.Empty;
-        public IEnumerable<string> SupportFormats { get; } = new[] { "u_ex*.log" };
-        public string InitialFolderFullPath { get; } = Environment.CurrentDirectory;
-        public bool DisableFilePoolingOption { get; } = false;
+        public override Guid Id { get; set; } = new Guid("44688C02-3156-45B1-B916-08DB96BCD358");
+        public override Image? LargeImage { get; set; } = null;
+        public override Image? SmallImage { get; set; } = null;
+        public override string FileOpenDialogFilters { get; set; } = "IIS log files|u_ex*.log";
+        public override IEnumerable<string> SupportFormats { get; set; } = new[] { "u_ex*.log" };
         private ILogParserSettings LogParserSettings { get; set; }
         private IISFileParser IISFileParser { get; set; }
-        private string NLogFileSetting { get; } = "AnalogyIISSettings.json";
-        public bool UseCustomColors { get; set; } = false;
-        public IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
-            => Array.Empty<(string, string)>();
+        private string iisFileSetting { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Analogy.LogViewer", "AnalogyIISSettings.json");
 
-        public (Color backgroundColor, Color foregroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
-            => (Color.Empty, Color.Empty);
-
-        public Task InitializeDataProviderAsync(IAnalogyLogger logger)
+        public override async Task InitializeDataProviderAsync(IAnalogyLogger logger)
         {
+            await base.InitializeDataProviderAsync(logger);
             LogManager.Instance.SetLogger(logger);
-            if (File.Exists(NLogFileSetting))
+            if (File.Exists(iisFileSetting))
             {
                 try
                 {
-                    LogParserSettings = JsonConvert.DeserializeObject<LogParserSettings>(NLogFileSetting);
+                    LogParserSettings = JsonConvert.DeserializeObject<LogParserSettings>(iisFileSetting);
                 }
                 catch (Exception)
                 {
@@ -71,17 +61,9 @@ namespace Analogy.LogViewer.IISLogsProvider
 
             }
             IISFileParser = new IISFileParser(LogParserSettings);
-            return Task.CompletedTask;
         }
 
-        public void MessageOpened(AnalogyLogMessage message)
-        {
-            //do nothing
-        }
-
-
-
-        public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
+        public override async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
             if (CanOpenFile(fileName))
                 return await IISFileParser.Process(fileName, token, messagesHandler);
@@ -89,19 +71,10 @@ namespace Analogy.LogViewer.IISLogsProvider
 
         }
 
-        public IEnumerable<FileInfo> GetSupportedFiles(DirectoryInfo dirInfo, bool recursiveLoad)
-        => GetSupportedFilesInternal(dirInfo, recursiveLoad);
 
-        public Task SaveAsync(List<AnalogyLogMessage> messages, string fileName)
-        {
-            throw new NotSupportedException("Saving is not supported for iis log");
-        }
+        public override bool CanOpenFile(string fileName) => LogParserSettings.CanOpenFile(fileName);
 
-        public bool CanOpenFile(string fileName) => LogParserSettings.CanOpenFile(fileName);
-
-        public bool CanOpenAllFiles(IEnumerable<string> fileNames) => fileNames.All(CanOpenFile);
-
-        public static List<FileInfo> GetSupportedFilesInternal(DirectoryInfo dirInfo, bool recursive)
+        protected override List<FileInfo> GetSupportedFilesInternal(DirectoryInfo dirInfo, bool recursive)
         {
             List<FileInfo> files = dirInfo.GetFiles("u_ex*.log").ToList();
             if (!recursive)

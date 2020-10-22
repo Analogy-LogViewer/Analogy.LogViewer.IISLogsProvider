@@ -7,16 +7,16 @@ using Analogy.LogViewer.IISLogsProvider.Properties;
 
 namespace Analogy.LogViewer.IISLogsProvider
 {
-    public class IISLogFactory : IAnalogyFactory
+    public class IISLogFactory : Analogy.LogViewer.Template.PrimaryFactory
     {
         internal static Guid AnalogyIISFactoryGuid { get; } = new Guid("AD7187B1-BD09-4BFE-A28B-3FD3DE879009");
-        public Guid FactoryId { get; set; } = AnalogyIISFactoryGuid;
-        public string Title { get; set; } = "IIS Parser";
-        public IEnumerable<IAnalogyChangeLog> ChangeLog { get; set; } = IISLogsProvider.ChangeLog.GetChangeLog();
-        public IEnumerable<string> Contributors { get; set; } = new List<string> { "Lior Banai" };
-        public string About { get; set; } = "Analogy IIS Parser";
-        public Image LargeImage { get; set; } = Resources.AnalogyIIS32x32;
-        public Image SmallImage { get; set; } = Resources.AnalogyIIS16x16;
+        public override Guid FactoryId { get; set; } = AnalogyIISFactoryGuid;
+        public override string Title { get; set; } = "IIS Parser";
+        public override IEnumerable<IAnalogyChangeLog> ChangeLog { get; set; } = IISLogsProvider.ChangeLog.GetChangeLog();
+        public override IEnumerable<string> Contributors { get; set; } = new List<string> { "Lior Banai" };
+        public override string About { get; set; } = "Analogy IIS Parser";
+        public override Image? LargeImage { get; set; } = Resources.AnalogyIIS32x32;
+        public override Image? SmallImage { get; set; } = Resources.AnalogyIIS16x16;
     }
 
     public class AnalogyIISLogCustomActionFactory : IAnalogyCustomActionsFactory
