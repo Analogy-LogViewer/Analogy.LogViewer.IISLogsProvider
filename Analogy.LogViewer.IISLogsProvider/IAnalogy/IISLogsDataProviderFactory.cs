@@ -16,7 +16,7 @@ namespace Analogy.LogViewer.IISLogsProvider
 {
     public class IISLogsDataProviderFactory : LogViewer.Template.DataProvidersFactory
     {
-        public override Guid FactoryId { get; set; } = IISLogFactory.AnalogyIISFactoryGuid;
+        public override Guid FactoryId { get; set; } = IISLogFactory.Id;
         public override string Title { get; set; } = "IIS Logs Data Provider";
 
         public override IEnumerable<IAnalogyDataProvider> DataProviders { get; set; } = new List<IAnalogyDataProvider> { new AnalogyIISDataProvider() };
@@ -106,7 +106,7 @@ namespace Analogy.LogViewer.IISLogsProvider
         public UserControl DataProviderSettings { get; } = new IISUserSettingsUC();
         public Image SmallImage { get; } = Properties.Resources.AnalogyIIS16x16;
         public Image LargeImage { get; } = Properties.Resources.AnalogyIIS32x32;
-        public Guid FactoryId { get; set; } = IISLogFactory.AnalogyIISFactoryGuid;
+        public Guid FactoryId { get; set; } = IISLogFactory.Id;
     }
 
 }
