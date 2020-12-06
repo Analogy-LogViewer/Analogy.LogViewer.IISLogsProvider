@@ -55,14 +55,18 @@ namespace Analogy.LogViewer.IISLogsProvider
                 {"date", (val,m)=>
                     {
                         if (DateTime.TryParse(val, out DateTime dt))
+                        {
                             m.Date = dt.Date;
+                        }
                     }
                 },
                 {
                     "time",  (val,m)=>
                     {
                         if (DateTime.TryParse(val, out DateTime dt))
+                        {
                             m.Date = m.Date.Date.Add(dt.TimeOfDay);
+                        }
                     }
 
                 },
@@ -147,15 +151,29 @@ namespace Analogy.LogViewer.IISLogsProvider
                         if (int.TryParse(val,out int status))
                         {
                             if (status >= 100 && status <= 199)
+                            {
                                 m.Level = AnalogyLogLevel.Debug;
+                            }
+
                             if (status >= 200 && status <= 299)
+                            {
                                 m.Level = AnalogyLogLevel.Information;
+                            }
+
                             if (status >= 300 && status <= 399)
+                            {
                                 m.Level = AnalogyLogLevel.Information;
+                            }
+
                             if (status >= 400 && status <= 499)
+                            {
                                 m.Level = AnalogyLogLevel.Error;
+                            }
+
                             if (status >= 500 && status <= 599)
+                            {
                                 m.Level = AnalogyLogLevel.Error;
+                            }
                         }
                     }
                 },

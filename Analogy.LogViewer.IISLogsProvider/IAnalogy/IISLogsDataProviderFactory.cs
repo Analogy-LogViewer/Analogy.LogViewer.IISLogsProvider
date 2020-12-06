@@ -66,7 +66,10 @@ namespace Analogy.LogViewer.IISLogsProvider
         public override async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
             if (CanOpenFile(fileName))
+            {
                 return await IISFileParser.Process(fileName, token, messagesHandler);
+            }
+
             return new List<AnalogyLogMessage>(0);
 
         }
@@ -78,7 +81,10 @@ namespace Analogy.LogViewer.IISLogsProvider
         {
             List<FileInfo> files = dirInfo.GetFiles("u_ex*.log").ToList();
             if (!recursive)
+            {
                 return files;
+            }
+
             try
             {
                 foreach (DirectoryInfo dir in dirInfo.GetDirectories())
