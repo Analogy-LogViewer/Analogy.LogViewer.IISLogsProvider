@@ -11,6 +11,10 @@ namespace Analogy.LogViewer.IISLogsProvider.UnitTests
     [TestClass]
     public class UnitTest1 : ILogMessageCreatedHandler
     {
+        public void ReportFileReadProgress(AnalogyFileReadProgress progress)
+        {
+            //noop
+        }
 
         public bool ForceNoFileCaching { get; set; } = true;
         public bool DoNotAddToRecentHistory { get; set; } = true;
