@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<TargetFrameworks>net5.0-windows;net48;net471;net472;netcoreapp3.1</TargetFrameworks>
+		<TargetFrameworks>net6.0-windows;net5.0-windows;net48;net471;net472;netcoreapp3.1</TargetFrameworks>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
@@ -12,7 +12,7 @@
 		<StartupObject />
 		<AssemblyName>Analogy.LogViewer.IISLogsProvider</AssemblyName>
 		<RootNamespace>Analogy.LogViewer.IISLogsProvider</RootNamespace>
-		<Version>1.6.4</Version>
+		<Version>1.7.0</Version>
 		<Copyright>Lior Banai © 2020-2021</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -29,18 +29,18 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.14.6" />
-		<PackageReference Include="Analogy.LogViewer.Template" Version="1.9.4" />
-		<PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.0.0">
+		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.15.1" />
+		<PackageReference Include="Analogy.LogViewer.Template" Version="2.0.0" />
+		<PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.1.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="System.Resources.Extensions" Version="5.0.0" />
+		<PackageReference Include="System.Resources.Extensions" Version="6.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
