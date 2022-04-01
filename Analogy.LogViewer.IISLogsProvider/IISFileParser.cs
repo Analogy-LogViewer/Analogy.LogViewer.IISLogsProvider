@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
 
 namespace Analogy.LogViewer.IISLogsProvider
 {
@@ -291,6 +292,7 @@ namespace Analogy.LogViewer.IISLogsProvider
             List<AnalogyLogMessage> messages = new List<AnalogyLogMessage>();
             try
             {
+                long count = 0;
                 using (var stream = File.OpenRead(fileName))
                 {
                     using (var reader = new StreamReader(stream))
@@ -313,6 +315,9 @@ namespace Analogy.LogViewer.IISLogsProvider
                             entry.FileName = fileName;
                             messages.Add(entry);
                             messagesHandler.AppendMessage(entry, Utils.GetFileNameAsDataSource(fileName));
+                            count++;
+                            messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count, count));
+
 
                         }
                     }
