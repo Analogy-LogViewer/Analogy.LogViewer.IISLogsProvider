@@ -36,9 +36,8 @@ namespace Analogy.LogViewer.IISLogsProvider
         private IISFileParser IISFileParser { get; set; }
         private string iisFileSetting { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Analogy.LogViewer", "AnalogyIISSettings.json");
 
-        public override async Task InitializeDataProviderAsync(IAnalogyLogger logger)
+        public override Task InitializeDataProvider(IAnalogyLogger logger)
         {
-            await base.InitializeDataProviderAsync(logger);
             LogManager.Instance.SetLogger(logger);
             if (File.Exists(iisFileSetting))
             {
@@ -61,6 +60,7 @@ namespace Analogy.LogViewer.IISLogsProvider
 
             }
             IISFileParser = new IISFileParser(LogParserSettings);
+            return base.InitializeDataProvider(logger);
         }
 
         public override async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
