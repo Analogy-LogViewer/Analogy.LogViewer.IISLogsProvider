@@ -1,6 +1,7 @@
 ﻿using Analogy.Interfaces;
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 
 namespace Analogy.LogViewer.IISLogsProvider.Managers
 {
@@ -114,12 +115,27 @@ namespace Analogy.LogViewer.IISLogsProvider.Managers
         {
             if (Logger == null)
             {
-                PendingMessages.Add((AnalogyLogLevel.Error, source, $"Error: {message.Length }Exception: {ex}", memberName, lineNumber, filePath));
+                PendingMessages.Add((AnalogyLogLevel.Error, source, $"Error: {message.Length}Exception: {ex}", memberName, lineNumber, filePath));
             }
             else
             {
                 Logger.LogException(message, ex, source, memberName, lineNumber, filePath);
             }
+        }
+
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
+        {
+            Logger?.Log(logLevel, eventId, state, exception, formatter);
+        }
+
+        public bool IsEnabled(LogLevel logLevel)
+        {
+            return Logger?.IsEnabled(logLevel) ?? false;
+        }
+
+        public IDisposable? BeginScope<TState>(TState state) where TState : notnull
+        {
+           return Logger?.BeginScope(state);
         }
     }
 }
