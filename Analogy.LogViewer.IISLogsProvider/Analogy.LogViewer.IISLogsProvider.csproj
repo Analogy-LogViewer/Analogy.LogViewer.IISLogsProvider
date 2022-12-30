@@ -12,8 +12,8 @@
 		<StartupObject />
 		<AssemblyName>Analogy.LogViewer.IISLogsProvider</AssemblyName>
 		<RootNamespace>Analogy.LogViewer.IISLogsProvider</RootNamespace>
-		<Version>3.5.0</Version>
-		<Copyright>Lior Banai © 2020-2022</Copyright>
+		<Version>3.6.0</Version>
+		<Copyright>Lior Banai © 2020-2023</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageProjectUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.IISLogsProvider</PackageProjectUrl>
@@ -29,8 +29,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="3.5.0" />
-		<PackageReference Include="Analogy.LogViewer.Template" Version="3.5.0" />
+		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="3.6.0" />
+		<PackageReference Include="Analogy.LogViewer.Template" Version="3.6.0" />
 		<PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.1.1">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
