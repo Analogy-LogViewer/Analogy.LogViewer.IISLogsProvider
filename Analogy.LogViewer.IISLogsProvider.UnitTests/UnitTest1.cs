@@ -21,7 +21,7 @@ namespace Analogy.LogViewer.IISLogsProvider.UnitTests
         private LogParserSettings LogParserSettings { get; set; }
         private CancellationTokenSource CancellationTokenSource { get; set; }
         private string filename = "u_ex_Test.log";
-        private List<AnalogyLogMessage> messages = new List<AnalogyLogMessage>();
+        private List<IAnalogyLogMessage> messages = new List<IAnalogyLogMessage>();
         [TestMethod]
         public async Task TestMethod1()
         {
@@ -36,12 +36,12 @@ namespace Analogy.LogViewer.IISLogsProvider.UnitTests
             Assert.IsTrue(allMessages.Count == 20 && allMessages.Count == messages.Count);
         }
 
-        public void AppendMessage(AnalogyLogMessage message, string dataSource)
+        public void AppendMessage(IAnalogyLogMessage message, string dataSource)
         {
             messages.Add(message);
         }
 
-        public void AppendMessages(List<AnalogyLogMessage> messages, string dataSource)
+        public void AppendMessages(List<IAnalogyLogMessage> messages, string dataSource)
         {
             this.messages.AddRange(messages);
         }
