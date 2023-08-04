@@ -11,7 +11,7 @@ namespace Analogy.LogViewer.IISLogsProvider
     {
         public static IEnumerable<AnalogyChangeLog> GetChangeLog()
         {
-            yield return new AnalogyChangeLog("IIS Data Provider: Initial release", AnalogChangeLogType.Improvement, "Lior Banai", new DateTime(2019, 11, 14));
+            yield return new AnalogyChangeLog("IIS Data Provider: Initial release", AnalogChangeLogType.Improvement, "Lior Banai", new DateTime(2019, 11, 14), "");
 
         }
     }

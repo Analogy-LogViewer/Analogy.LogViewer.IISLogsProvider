@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Analogy.LogViewer.Template.Managers;
+using Microsoft.Extensions.Logging;
 
 namespace Analogy.LogViewer.IISLogsProvider.IAnalogy
 {
@@ -18,22 +19,22 @@ namespace Analogy.LogViewer.IISLogsProvider.IAnalogy
         public override string? OptionalTitle { get; set; } = "Analogy IIS Log Parser";
 
         public override Guid Id { get; set; } = new Guid("44688C02-3156-45B1-B916-08DB96BCD358");
-        public override Image? LargeImage { get; set; } = null;
-        public override Image? SmallImage { get; set; } = null;
+        public override Image? LargeImage { get; set; }
+        public override Image? SmallImage { get; set; }
         public override string FileOpenDialogFilters { get; set; } = "IIS log files|u_ex*.log";
         public override IEnumerable<string> SupportFormats { get; set; } = new[] { "u_ex*.log" };
         private ILogParserSettings LogParserSettings { get; set; }
         private IISFileParser IISFileParser { get; set; }
-        private string iisFileSetting { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Analogy.LogViewer", "AnalogyIISSettings.json");
+        private string IisFileSetting { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Analogy.LogViewer", "AnalogyIISSettings.json");
 
-        public override Task InitializeDataProvider(IAnalogyLogger logger)
+        public override Task InitializeDataProvider(ILogger logger)
         {
             LogManager.Instance.SetLogger(logger);
-            if (File.Exists(iisFileSetting))
+            if (File.Exists(IisFileSetting))
             {
                 try
                 {
-                    LogParserSettings = JsonConvert.DeserializeObject<LogParserSettings>(iisFileSetting);
+                    LogParserSettings = JsonConvert.DeserializeObject<LogParserSettings>(IisFileSetting);
                 }
                 catch (Exception)
                 {
