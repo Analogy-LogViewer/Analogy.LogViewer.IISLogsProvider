@@ -1,18 +1,17 @@
-﻿using System;
+﻿using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Analogy.Interfaces;
-using Analogy.Interfaces.DataTypes;
 
 namespace Analogy.LogViewer.IISLogsProvider
 {
     public class IISFileParser
     {
-        private Dictionary<string, (string value, string description)> Mapping;
+        private Dictionary<string, (string Value, string Description)> Mapping;
         private Dictionary<string, Action<string, AnalogyLogMessage>> ActionMapping;
         private ILogParserSettings _logFileSettings;
         private Dictionary<int, string> columnIndexToName;
@@ -22,38 +21,39 @@ namespace Analogy.LogViewer.IISLogsProvider
         {
             _logFileSettings = logParserSettings;
 
-            Mapping = new Dictionary<string, (string value, string description)>
+            Mapping = new Dictionary<string, (string Value, string Description)>
+(StringComparer.Ordinal)
             {
-                {"date", ("Date", "The date on which the activity occurred")},
-                {"time", ("Time", "The time, in coordinated universal time (UTC), at which the activity occurred")},
-                {"c-ip", ("Client IP Address", "The IP address of the client that made the request")},
-                {"cs-username", ("User Name", "The name of the authenticated user who accessed your server. Anonymous users are indicated by a hyphen")},
-                {"s-sitename", ("Service Name and Instance Number", "The Internet service name and instance number that was running on the client")},
-                {"s-computername", ("Server Name", "The name of the server on which the log file entry was generated")},
-                {"s-ip", ("Server IP Address", "The IP address of the server on which the log file entry was generated")},
-                {"s-port", ("Server Port", "The server port number that is configured for the service")},
-                {"cs-method", ("Method", "The requested action, for example, a GET method")},
-                {"cs-uri-stem", ("URI Stem", "The target of the action, for example, Default.htm")},
-                {"cs-uri-query", ("URI Query", "The query, if any that the client was trying to perform. A Universal Resource Identifier (URI) query is necessary only for dynamic pages")},
-                {"sc-status", ("HTTP Status", "The HTTP status code")},
-                {"sc-win32-status", ("Win32 Status", "The Windows status code")},
-                {"sc-bytes", ("Bytes Sent", "The number of bytes that the server sent")},
-                {"cs-bytes", ("Bytes Received", "The number of bytes that the server received")},
-                {"time-taken", ("Time Taken", "The length of time that the action took, in milliseconds")},
+                { "date", ("Date", "The date on which the activity occurred")},
+                { "time", ("Time", "The time, in coordinated universal time (UTC), at which the activity occurred")},
+                { "c-ip", ("Client IP Address", "The IP address of the client that made the request")},
+                { "cs-username", ("User Name", "The name of the authenticated user who accessed your server. Anonymous users are indicated by a hyphen")},
+                { "s-sitename", ("Service Name and Instance Number", "The Internet service name and instance number that was running on the client")},
+                { "s-computername", ("Server Name", "The name of the server on which the log file entry was generated")},
+                { "s-ip", ("Server IP Address", "The IP address of the server on which the log file entry was generated")},
+                { "s-port", ("Server Port", "The server port number that is configured for the service")},
+                { "cs-method", ("Method", "The requested action, for example, a GET method")},
+                { "cs-uri-stem", ("URI Stem", "The target of the action, for example, Default.htm")},
+                { "cs-uri-query", ("URI Query", "The query, if any that the client was trying to perform. A Universal Resource Identifier (URI) query is necessary only for dynamic pages")},
+                { "sc-status", ("HTTP Status", "The HTTP status code")},
+                { "sc-win32-status", ("Win32 Status", "The Windows status code")},
+                { "sc-bytes", ("Bytes Sent", "The number of bytes that the server sent")},
+                { "cs-bytes", ("Bytes Received", "The number of bytes that the server received")},
+                { "time-taken", ("Time Taken", "The length of time that the action took, in milliseconds")},
 
-                {"cs-version", ("Protocol Version", "The protocol version —HTTP or FTP —that the client used.")},
-                {"cs-host", ("Host", "The host header name, if any")},
-                {"cs(User-Agent)", ("User Agent", "The browser type that the client used")},
-                {"cs(Cookie)", ("Cookie", "The content of the cookie sent or received if any.")},
-                {"cs(Referer)", ("Referer", "The site that the user last visited. This site provided a link to the current site")},
-                {"sc-substatus", ("Protocol Substatus", "The sub status error code")}
-
+                { "cs-version", ("Protocol Version", "The protocol version —HTTP or FTP —that the client used.")},
+                { "cs-host", ("Host", "The host header name, if any")},
+                { "cs(User-Agent)", ("User Agent", "The browser type that the client used")},
+                { "cs(Cookie)", ("Cookie", "The content of the cookie sent or received if any.")},
+                { "cs(Referer)", ("Referer", "The site that the user last visited. This site provided a link to the current site")},
+                { "sc-substatus", ("Protocol Substatus", "The sub status error code")},
             };
 
             ActionMapping = new Dictionary<string, Action<string, AnalogyLogMessage>>
+(StringComparer.Ordinal)
             {
-
-                {"date", (val,m)=>
+                {
+                    "date", (val, m)=>
                     {
                         if (DateTime.TryParse(val, out DateTime dt))
                         {
@@ -62,93 +62,100 @@ namespace Analogy.LogViewer.IISLogsProvider
                     }
                 },
                 {
-                    "time",  (val,m)=>
+                    "time",  (val, m)=>
                     {
                         if (DateTime.TryParse(val, out DateTime dt))
                         {
                             m.Date = m.Date.Date.Add(dt.TimeOfDay);
                         }
                     }
-
                 },
-                {"c-ip",  (val,m)=>
+                {
+                    "c-ip",  (val, m)=>
                     {
                         m.Text += val == "-" ? string.Empty : $"Client ip: {val + Environment.NewLine}";
                         m.Source += $"Client ip: {val}.";
-                        m.AddOrReplaceAdditionalProperty("c-ip",$"Client ip: {val}.");
+                        m.AddOrReplaceAdditionalProperty("c-ip", $"Client ip: {val}.", StringComparer.Ordinal);
                     }
                 },
-                {"cs-username",  (val,m)=>
+                {
+                    "cs-username",  (val, m)=>
                     {
                         m.Text += val == "-"
                             ? string.Empty
-                            : $"{Mapping["cs-username"].value}: {val + Environment.NewLine}";
+                            : $"{Mapping["cs-username"].Value}: {val + Environment.NewLine}";
                         m.User = val;
                     }
                 },
-                {"s-sitename",  (val,m)=>
+                {
+                    "s-sitename",  (val, m)=>
                     {
                         m.Text += val == "-"
                             ? string.Empty
-                            : $"{Mapping["s-sitename"].value}: {val + Environment.NewLine}";
-                        m.AddOrReplaceAdditionalProperty("s-sitename",val);
+                            : $"{Mapping["s-sitename"].Value}: {val + Environment.NewLine}";
+                        m.AddOrReplaceAdditionalProperty("s-sitename", val, StringComparer.Ordinal);
                     }
                 },
-                {"s-computername",  (val,m)=>
+                {
+                    "s-computername",  (val, m)=>
                     {
-
                         m.Text += val == "-"
                             ? string.Empty
-                            : $"{Mapping["s-computername"].value}: {val + Environment.NewLine}";
-                        m.AddOrReplaceAdditionalProperty("s-computername",val);
+                            : $"{Mapping["s-computername"].Value}: {val + Environment.NewLine}";
+                        m.AddOrReplaceAdditionalProperty("s-computername", val, StringComparer.Ordinal);
                     }
                 },
-                {"s-ip",   (val,m)=>
+                {
+                    "s-ip",   (val, m)=>
                     {
-                        m.Text += val == "-" ? string.Empty : $"{Mapping["s-ip"].value}: {val + Environment.NewLine}";
+                        m.Text += val == "-" ? string.Empty : $"{Mapping["s-ip"].Value}: {val + Environment.NewLine}";
                         m.Source += $"Server ip: {val}.";
-                        m.AddOrReplaceAdditionalProperty("s-ip",$"Server ip: {val}.");
+                        m.AddOrReplaceAdditionalProperty("s-ip", $"Server ip: {val}.", StringComparer.Ordinal);
                     }
                 },
-                {"s-port",   (val,m)=>
+                {
+                    "s-port",   (val, m)=>
                     {
-                        m.Text += val == "-" ? string.Empty : $"{Mapping["s-port"].value}: {val + Environment.NewLine}";
-                        m.AddOrReplaceAdditionalProperty("s-port",val);
+                        m.Text += val == "-" ? string.Empty : $"{Mapping["s-port"].Value}: {val + Environment.NewLine}";
+                        m.AddOrReplaceAdditionalProperty("s-port", val, StringComparer.Ordinal);
                     }
                 },
-                {"cs-method",   (val,m)=>
+                {
+                    "cs-method",   (val, m)=>
                     {
                         m.Text += val == "-"
                             ? string.Empty
-                            : $"{Mapping["cs-method"].value}: {val + Environment.NewLine}";
+                            : $"{Mapping["cs-method"].Value}: {val + Environment.NewLine}";
                         m.MethodName = val;
-                        m.AddOrReplaceAdditionalProperty("cs-method",val);
+                        m.AddOrReplaceAdditionalProperty("cs-method", val, StringComparer.Ordinal);
                     }
                 },
-                {"cs-uri-stem",   (val,m)=>
+                {
+                    "cs-uri-stem",   (val, m)=>
                     {
                         m.Text += val == "-"
                             ? string.Empty
-                            : $"{Mapping["cs-uri-stem"].value}: {val + Environment.NewLine}";
-                        m.AddOrReplaceAdditionalProperty("cs-uri-stem",val);
+                            : $"{Mapping["cs-uri-stem"].Value}: {val + Environment.NewLine}";
+                        m.AddOrReplaceAdditionalProperty("cs-uri-stem", val, StringComparer.Ordinal);
                     }
                 },
-                {"cs-uri-query",   (val,m)=>
+                {
+                    "cs-uri-query",   (val, m)=>
                     {
-
                         m.Text += val == "-"
                             ? string.Empty
-                            : $"{Mapping["cs-uri-query"].value}: {val + Environment.NewLine}";
-                        m.AddOrReplaceAdditionalProperty("cs-uri-query",val);
+                            : $"{Mapping["cs-uri-query"].Value}: {val + Environment.NewLine}";
+                        m.AddOrReplaceAdditionalProperty("cs-uri-query", val, StringComparer.Ordinal);
                     }
                 },
-                {"sc-status",   (val,m)=>
+                {
+                    "sc-status",   (val, m)=>
                     {
-                        m.AddOrReplaceAdditionalProperty("sc-status",val);
+                        m.AddOrReplaceAdditionalProperty("sc-status", val, StringComparer.Ordinal);
                         m.Text += val == "-"
                             ? string.Empty
-                            : $"{Mapping["sc-status"].value}: {val + Environment.NewLine}";
-                        if (int.TryParse(val,out int status))
+                            : $"{Mapping["sc-status"].Value}: {val + Environment.NewLine}";
+                        if (int.TryParse(val, out int status))
                         {
                             if (status is >= 100 and <= 199)
                             {
@@ -177,92 +184,99 @@ namespace Analogy.LogViewer.IISLogsProvider
                         }
                     }
                 },
-                {"sc-win32-status",   (val,m)=>
+                {
+                    "sc-win32-status",   (val, m)=>
                     {
-                        m.AddOrReplaceAdditionalProperty("sc-win32-status",val);
+                        m.AddOrReplaceAdditionalProperty("sc-win32-status", val, StringComparer.Ordinal);
                         m.Text += val == "-"
                             ? string.Empty
-                            : $"{Mapping["sc-win32-status"].value}: {val + Environment.NewLine}";
+                            : $"{Mapping["sc-win32-status"].Value}: {val + Environment.NewLine}";
                     }
                 },
-                {"sc-bytes",   (val,m)=>
+                {
+                    "sc-bytes",   (val, m)=>
                     {
-                        m.AddOrReplaceAdditionalProperty("sc-bytes",val);
+                        m.AddOrReplaceAdditionalProperty("sc-bytes", val, StringComparer.Ordinal);
                         m.Text += val == "-"
                             ? string.Empty
-                            : $"{Mapping["sc-bytes"].value}: {val + Environment.NewLine}";
+                            : $"{Mapping["sc-bytes"].Value}: {val + Environment.NewLine}";
                     }
                 },
-                {"cs-bytes",   (val,m)=>
+                {
+                    "cs-bytes",   (val, m)=>
                     {
-                        m.AddOrReplaceAdditionalProperty("cs-bytes",val);
+                        m.AddOrReplaceAdditionalProperty("cs-bytes", val, StringComparer.Ordinal);
                         m.Text += val == "-"
                             ? string.Empty
-                            : $"{Mapping["cs-bytes"].value}: {val + Environment.NewLine}";
+                            : $"{Mapping["cs-bytes"].Value}: {val + Environment.NewLine}";
                     }
                 },
-                {"time-taken",   (val,m)=>
+                {
+                    "time-taken",   (val, m)=>
                     {
-                        m.AddOrReplaceAdditionalProperty("time-taken",val);
+                        m.AddOrReplaceAdditionalProperty("time-taken", val, StringComparer.Ordinal);
                         m.Text += val == "-"
                             ? string.Empty
-                            : $"{Mapping["time-taken"].value}: {val + Environment.NewLine}";
+                            : $"{Mapping["time-taken"].Value}: {val + Environment.NewLine}";
                     }
                 },
-                {"cs-version",  (val,m)=>
+                {
+                    "cs-version",  (val, m)=>
                     {
-                        m.AddOrReplaceAdditionalProperty("cs-version",val);
+                        m.AddOrReplaceAdditionalProperty("cs-version", val, StringComparer.Ordinal);
                         m.Text += val == "-"
                             ? string.Empty
-                            : $"{Mapping["cs-version"].value}: {val + Environment.NewLine}";
+                            : $"{Mapping["cs-version"].Value}: {val + Environment.NewLine}";
                     }
                 },
-                {"cs-host",  (val,m)=>
+                {
+                    "cs-host",  (val, m)=>
                     {
-                        m.AddOrReplaceAdditionalProperty("cs-host",val);
+                        m.AddOrReplaceAdditionalProperty("cs-host", val, StringComparer.Ordinal);
                         m.Text += val == "-"
                             ? string.Empty
-                            : $"{Mapping["cs-host"].value}: {val + Environment.NewLine}";
+                            : $"{Mapping["cs-host"].Value}: {val + Environment.NewLine}";
                     }
                 },
-                {"cs(User-Agent)",   (val,m)=>
+                {
+                    "cs(User-Agent)",   (val, m)=>
                     {
-                        m.AddOrReplaceAdditionalProperty("cs(User-Agent)",val);
+                        m.AddOrReplaceAdditionalProperty("cs(User-Agent)", val, StringComparer.Ordinal);
                         m.Text += val == "-"
                             ? string.Empty
-                            : $"{Mapping["cs(User-Agent)"].value}: {val + Environment.NewLine}";
+                            : $"{Mapping["cs(User-Agent)"].Value}: {val + Environment.NewLine}";
                     }
                 },
-                {"cs(Cookie)",   (val,m)=>
+                {
+                    "cs(Cookie)",   (val, m)=>
                     {
-                        m.AddOrReplaceAdditionalProperty("cs(Cookie)",val);
+                        m.AddOrReplaceAdditionalProperty("cs(Cookie)", val, StringComparer.Ordinal);
                         m.Text += val == "-"
                             ? string.Empty
-                            : $"{Mapping["cs(Cookie)"].value}: {val + Environment.NewLine}";
+                            : $"{Mapping["cs(Cookie)"].Value}: {val + Environment.NewLine}";
                     }
                 },
-                {"cs(Referer)",   (val,m)=>
+                {
+                    "cs(Referer)",   (val, m)=>
                     {
-                        m.AddOrReplaceAdditionalProperty("cs(Referer)",val);
+                        m.AddOrReplaceAdditionalProperty("cs(Referer)", val, StringComparer.Ordinal);
                         m.Text += val == "-"
                             ? string.Empty
-                            : $"{Mapping["cs(Referer)"].value}: {val + Environment.NewLine}";
+                            : $"{Mapping["cs(Referer)"].Value}: {val + Environment.NewLine}";
                         m.Module =val;
                     }
                 },
-                {"sc-substatus",   (val,m)=>
+                {
+                    "sc-substatus",   (val, m)=>
                     {
-                        m.AddOrReplaceAdditionalProperty("sc-substatus",val);
+                        m.AddOrReplaceAdditionalProperty("sc-substatus", val, StringComparer.Ordinal);
                         m.Text += val == "-"
                             ? string.Empty
-                            : $"{Mapping["sc-substatus"].value}: {val + Environment.NewLine}";
+                            : $"{Mapping["sc-substatus"].Value}: {val + Environment.NewLine}";
                     }
-                }
-                };
-
-
+                },
+            };
         }
-
 
         public async Task<IEnumerable<IAnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
@@ -272,7 +286,7 @@ namespace Analogy.LogViewer.IISLogsProvider
                     AnalogyLogLevel.Critical, AnalogyLogClass.General, "Analogy", "None")
                 {
                     Source = "Analogy",
-                    Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName
+                    Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName,
                 };
                 messagesHandler.AppendMessage(empty, Utils.GetFileNameAsDataSource(fileName));
                 return new List<AnalogyLogMessage> { empty };
@@ -283,7 +297,7 @@ namespace Analogy.LogViewer.IISLogsProvider
                     AnalogyLogLevel.Critical, AnalogyLogClass.General, "Analogy", "None")
                 {
                     Source = "Analogy",
-                    Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName
+                    Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName,
                 };
                 messagesHandler.AppendMessage(empty, Utils.GetFileNameAsDataSource(fileName));
                 return new List<AnalogyLogMessage> { empty };
@@ -316,8 +330,6 @@ namespace Analogy.LogViewer.IISLogsProvider
                             messagesHandler.AppendMessage(entry, Utils.GetFileNameAsDataSource(fileName));
                             count++;
                             messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count, count));
-
-
                         }
                     }
                 }
@@ -330,7 +342,7 @@ namespace Analogy.LogViewer.IISLogsProvider
                     AnalogyLogLevel.Critical, AnalogyLogClass.General, "Analogy", "None")
                 {
                     Source = "Analogy",
-                    Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName
+                    Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName,
                 };
                 messagesHandler.AppendMessage(empty, Utils.GetFileNameAsDataSource(fileName));
                 return new List<IAnalogyLogMessage> { empty };
@@ -346,6 +358,7 @@ namespace Analogy.LogViewer.IISLogsProvider
             if (line.StartsWith(fieldHeader, StringComparison.CurrentCultureIgnoreCase))
             {
                 line = line.Remove(0, fieldHeader.Length);
+                
                 //generate map
                 var items = line.Split(splitters, StringSplitOptions.RemoveEmptyEntries).ToList();
                 columnIndexToName = items.ToDictionary(itm => items.IndexOf(itm), itm => itm);

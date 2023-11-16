@@ -1,10 +1,10 @@
 ﻿using Analogy.Interfaces;
+using Analogy.LogViewer.IISLogsProvider.IAnalogy;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Analogy.LogViewer.IISLogsProvider.IAnalogy;
 
 namespace Analogy.LogViewer.IISLogsProvider
 {
@@ -14,10 +14,8 @@ namespace Analogy.LogViewer.IISLogsProvider
         public override string Title { get; set; } = "IIS Logs Data Provider";
 
         public override IEnumerable<IAnalogyDataProvider> DataProviders { get; set; } = new List<IAnalogyDataProvider> { new AnalogyIISDataProvider() };
-
     }
 
-  
     public class AnalogyIISUserSettings //: IAnalogyDataProviderSettings
     {
         public Task SaveSettingsAsync()
@@ -31,5 +29,4 @@ namespace Analogy.LogViewer.IISLogsProvider
         public Image LargeImage { get; } = Properties.Resources.AnalogyIIS32x32;
         public Guid FactoryId { get; set; } = IISLogFactory.Id;
     }
-
 }

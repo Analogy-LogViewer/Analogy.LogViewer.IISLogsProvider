@@ -45,6 +45,5 @@ namespace Analogy.LogViewer.IISLogsProvider.UnitTests
         {
             this.messages.AddRange(messages);
         }
-
     }
 }

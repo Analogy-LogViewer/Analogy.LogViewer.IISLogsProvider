@@ -1,47 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<TargetFrameworks>net7.0-windows;net6.0-windows;net48;net471</TargetFrameworks>
-		<PublishRepositoryUrl>true</PublishRepositoryUrl>
-		<EmbedUntrackedSources>true</EmbedUntrackedSources>
-		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-		<IncludeSymbols>true</IncludeSymbols>
-		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		<UseWindowsForms>true</UseWindowsForms>
-		<ApplicationIcon />
-		<StartupObject />
+		<TargetFrameworks>net8.0-windows;net7.0-windows;net6.0-windows;net48;net471</TargetFrameworks>
 		<AssemblyName>Analogy.LogViewer.IISLogsProvider</AssemblyName>
 		<RootNamespace>Analogy.LogViewer.IISLogsProvider</RootNamespace>
-		<VersionPrefix>5.0.3.0</VersionPrefix>
+		<VersionPrefix>6.0.0</VersionPrefix>
 		<VersionSuffix></VersionSuffix>
-		<Copyright>Lior Banai © 2020-2023</Copyright>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Copyright>Lior Banai © 2020-2024</Copyright>
 		<PackageProjectUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.IISLogsProvider</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.IISLogsProvider</RepositoryUrl>
-		<RepositoryType>git</RepositoryType>
 		<PackageIcon>icon.jpg</PackageIcon>
-		<PackageIconUrl />
 		<Authors>Lior Banai</Authors>
-		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 		<Company>Analogy.LogViewer</Company>
-		<Nullable>enable</Nullable>
-		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="5.0.3" />
-		<PackageReference Include="Analogy.LogViewer.Template" Version="5.0.3" />
-		<PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.1.1">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
+		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="6.0.0.1" />
+		<PackageReference Include="Analogy.LogViewer.Template" Version="6.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="System.Resources.Extensions" Version="7.0.0" />
+		<PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

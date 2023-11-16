@@ -1,9 +1,9 @@
 ﻿using Analogy.Interfaces;
 using Analogy.Interfaces.Factories;
+using Analogy.LogViewer.IISLogsProvider.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using Analogy.LogViewer.IISLogsProvider.Properties;
 
 namespace Analogy.LogViewer.IISLogsProvider
 {

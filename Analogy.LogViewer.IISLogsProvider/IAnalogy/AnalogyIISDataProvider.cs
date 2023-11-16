@@ -1,16 +1,15 @@
-﻿using Analogy.Interfaces.DataTypes;
-using Analogy.Interfaces;
+﻿using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
+using Analogy.LogViewer.Template.Managers;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Analogy.LogViewer.Template.Managers;
-using Microsoft.Extensions.Logging;
 
 namespace Analogy.LogViewer.IISLogsProvider.IAnalogy
 {
@@ -48,7 +47,6 @@ namespace Analogy.LogViewer.IISLogsProvider.IAnalogy
                 LogParserSettings = new LogParserSettings();
                 LogParserSettings.IsConfigured = true;
                 LogParserSettings.SupportedFilesExtensions = new List<string> { "u_ex*.log" };
-
             }
             IISFileParser = new IISFileParser(LogParserSettings);
             return base.InitializeDataProvider(logger);
@@ -62,9 +60,7 @@ namespace Analogy.LogViewer.IISLogsProvider.IAnalogy
             }
 
             return new List<IAnalogyLogMessage>(0);
-
         }
-
 
         public override bool CanOpenFile(string fileName) => LogParserSettings.CanOpenFile(fileName);
 
@@ -91,5 +87,4 @@ namespace Analogy.LogViewer.IISLogsProvider.IAnalogy
             return files;
         }
     }
-
 }
