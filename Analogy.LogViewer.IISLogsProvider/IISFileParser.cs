@@ -16,7 +16,13 @@ namespace Analogy.LogViewer.IISLogsProvider
         private ILogParserSettings _logFileSettings;
         private Dictionary<int, string> columnIndexToName;
         private const string fieldHeader = "#Fields:";
-        private string[] splitters = new[] { " " };
+        private string[] splitters = [" "];
+
+        private Action<string, string, AnalogyLogMessage> CustomPropertyAppender = (key, val, m) =>
+        {
+            m.Text += val == "-" ? string.Empty : $"{Environment.NewLine} {key}:{val}";
+            m.AddOrReplaceAdditionalProperty(key, val);
+        };
         public IISFileParser(ILogParserSettings logParserSettings)
         {
             _logFileSettings = logParserSettings;
@@ -358,7 +364,7 @@ namespace Analogy.LogViewer.IISLogsProvider
             if (line.StartsWith(fieldHeader, StringComparison.CurrentCultureIgnoreCase))
             {
                 line = line.Remove(0, fieldHeader.Length);
-                
+
                 //generate map
                 var items = line.Split(splitters, StringSplitOptions.RemoveEmptyEntries).ToList();
                 columnIndexToName = items.ToDictionary(itm => items.IndexOf(itm), itm => itm);
@@ -373,7 +379,14 @@ namespace Analogy.LogViewer.IISLogsProvider
             {
                 string value = items[index];
                 string field = columnIndexToName[index];
-                ActionMapping[field](value, m);
+                if (ActionMapping.TryGetValue(field, out var action))
+                {
+                    action(value, m);
+                }
+                else //custom
+                {
+                    CustomPropertyAppender(field, value, m);
+                }
             }
 
             return m;

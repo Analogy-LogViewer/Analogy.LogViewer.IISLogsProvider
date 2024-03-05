@@ -60,6 +60,9 @@
     <None Include="u_ex_Test.log">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="u_ex_Test_Custom.log">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Analogy.LogViewer.IISLogsProvider\Analogy.LogViewer.IISLogsProvider.csproj">
