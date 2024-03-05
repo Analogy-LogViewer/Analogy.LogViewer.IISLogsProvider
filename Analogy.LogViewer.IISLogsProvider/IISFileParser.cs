@@ -68,7 +68,7 @@ namespace Analogy.LogViewer.IISLogsProvider
                     }
                 },
                 {
-                    "time",  (val, m)=>
+                    "time",  (val, m) =>
                     {
                         if (DateTime.TryParse(val, out DateTime dt))
                         {
