@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<TargetFrameworks>net8.0-windows;net7.0-windows;net6.0-windows;net48;net471</TargetFrameworks>
+		<TargetFrameworks>net8.0-windows;net6.0-windows;net48</TargetFrameworks>
 		<AssemblyName>Analogy.LogViewer.IISLogsProvider</AssemblyName>
 		<RootNamespace>Analogy.LogViewer.IISLogsProvider</RootNamespace>
-		<VersionPrefix>6.0.2</VersionPrefix>
+		<VersionPrefix>7.0.0</VersionPrefix>
 		<VersionSuffix></VersionSuffix>
 		<Copyright>Lior Banai © 2020-2024</Copyright>
 		<PackageProjectUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.IISLogsProvider</PackageProjectUrl>
@@ -15,8 +15,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="6.0.0.1" />
-		<PackageReference Include="Analogy.LogViewer.Template" Version="6.0.0" />
+		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="7.0.0.1" />
+		<PackageReference Include="Analogy.LogViewer.Template" Version="7.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
 	</ItemGroup>

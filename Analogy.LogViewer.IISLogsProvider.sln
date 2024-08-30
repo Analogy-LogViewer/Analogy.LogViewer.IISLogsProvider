@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analogy.LogViewer.IISLogsProvider.UnitTests", "Analogy.LogViewer.IISLogsProvider.UnitTests\Analogy.LogViewer.IISLogsProvider.UnitTests.csproj", "{C9CF5E60-AD3D-48DE-A7A2-7F3F33A40BF1}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analogy.LogViewer.IISLogsProvider", "Analogy.LogViewer.IISLogsProvider\Analogy.LogViewer.IISLogsProvider.csproj", "{1113A28E-C7FD-4D5F-9145-DC3C232D2EEC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D679B2EB-CCFC-44CF-9F03-5799D0E7C32D}"
@@ -15,20 +13,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		nuget.config = nuget.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analogy.LogViewer.IISLogsProvider.UnitTests", "Analogy.LogViewer.IISLogsProvider.UnitTests\Analogy.LogViewer.IISLogsProvider.UnitTests.csproj", "{5A9FA6EC-5C71-4190-8B40-C2897DFD25ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C9CF5E60-AD3D-48DE-A7A2-7F3F33A40BF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C9CF5E60-AD3D-48DE-A7A2-7F3F33A40BF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C9CF5E60-AD3D-48DE-A7A2-7F3F33A40BF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C9CF5E60-AD3D-48DE-A7A2-7F3F33A40BF1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1113A28E-C7FD-4D5F-9145-DC3C232D2EEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1113A28E-C7FD-4D5F-9145-DC3C232D2EEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1113A28E-C7FD-4D5F-9145-DC3C232D2EEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1113A28E-C7FD-4D5F-9145-DC3C232D2EEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A9FA6EC-5C71-4190-8B40-C2897DFD25ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A9FA6EC-5C71-4190-8B40-C2897DFD25ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A9FA6EC-5C71-4190-8B40-C2897DFD25ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A9FA6EC-5C71-4190-8B40-C2897DFD25ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
