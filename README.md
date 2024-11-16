@@ -10,9 +10,6 @@
 <a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.IISLogsProvider/blob/master/LICENSE.md">
     <img src="https://img.shields.io/github/license/Analogy-LogViewer/Analogy.LogViewer.IISLogsProvider"  alt="License" />
 </a>
-<a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.IISLogsProvider/releases">
-    <img src="https://img.shields.io/github/v/release/Analogy-LogViewer/Analogy.LogViewer.IISLogsProvider"  alt="Latest Release" />
-</a>
 [![Nuget](https://img.shields.io/nuget/v/Analogy.LogViewer.IISLogsProvider)](https://www.nuget.org/packages/Analogy.LogViewer.IISLogsProvider/)
 </p>
 
