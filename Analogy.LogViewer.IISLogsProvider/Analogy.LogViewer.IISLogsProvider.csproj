@@ -4,7 +4,7 @@
 		<TargetFrameworks>net9.0-windows;net8.0-windows;net48</TargetFrameworks>
 		<AssemblyName>Analogy.LogViewer.IISLogsProvider</AssemblyName>
 		<RootNamespace>Analogy.LogViewer.IISLogsProvider</RootNamespace>
-		<VersionPrefix>7.1.0</VersionPrefix>
+		<VersionPrefix>7.1.1</VersionPrefix>
 		<VersionSuffix></VersionSuffix>
 		<Copyright>Lior Banai 2020-2025</Copyright>
 		<PackageProjectUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.IISLogsProvider</PackageProjectUrl>
