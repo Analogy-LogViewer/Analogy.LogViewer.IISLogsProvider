@@ -61,18 +61,18 @@ namespace Analogy.LogViewer.IISLogsProvider
                 {
                     "date", (val, m)=>
                     {
-                        if (DateTime.TryParse(val, out DateTime dt))
+                        if (DateTimeOffset.TryParse(val, out DateTimeOffset dt))
                         {
-                            m.Date = dt.Date;
+                            m.Date = dt;
                         }
                     }
                 },
                 {
                     "time",  (val, m) =>
                     {
-                        if (DateTime.TryParse(val, out DateTime dt))
+                        if (DateTimeOffset.TryParse(val, out DateTimeOffset dt))
                         {
-                            m.Date = m.Date.Date.Add(dt.TimeOfDay);
+                            m.Date = dt;
                         }
                     }
                 },
@@ -359,7 +359,7 @@ namespace Analogy.LogViewer.IISLogsProvider
         {
             var m = new AnalogyLogMessage("Header: " + line, AnalogyLogLevel.Information, AnalogyLogClass.General, filename,
                 "", "IIS");
-            m.Date = DateTime.MinValue;
+            m.Date = DateTimeOffset.MinValue;
 
             if (line.StartsWith(fieldHeader, StringComparison.CurrentCultureIgnoreCase))
             {
