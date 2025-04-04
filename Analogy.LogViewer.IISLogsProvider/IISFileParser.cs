@@ -312,32 +312,28 @@ namespace Analogy.LogViewer.IISLogsProvider
             try
             {
                 long count = 0;
-                using (var stream = File.OpenRead(fileName))
+                using var stream = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                using var reader = new StreamReader(stream);
+                while (!reader.EndOfStream)
                 {
-                    using (var reader = new StreamReader(stream))
+                    var line = await reader.ReadLineAsync();
+                    if (line.StartsWith("#Software:", StringComparison.CurrentCultureIgnoreCase) ||
+                        line.StartsWith("#Version:", StringComparison.CurrentCultureIgnoreCase) ||
+                        line.StartsWith("#Date:", StringComparison.CurrentCultureIgnoreCase) ||
+                        line.StartsWith(fieldHeader, StringComparison.CurrentCultureIgnoreCase))
                     {
-                        while (!reader.EndOfStream)
-                        {
-                            var line = await reader.ReadLineAsync();
-                            if (line.StartsWith("#Software:", StringComparison.CurrentCultureIgnoreCase) ||
-                                line.StartsWith("#Version:", StringComparison.CurrentCultureIgnoreCase) ||
-                                line.StartsWith("#Date:", StringComparison.CurrentCultureIgnoreCase) ||
-                                line.StartsWith(fieldHeader, StringComparison.CurrentCultureIgnoreCase))
-                            {
-                                var headerMsg = HandleHeaderMessage(line, fileName);
-                                messagesHandler.AppendMessage(headerMsg, Utils.GetFileNameAsDataSource(fileName));
-                                messages.Add(headerMsg);
-                                continue;
-                            }
-                            var items = line.Split(splitters, StringSplitOptions.None);
-                            var entry = Parse(items);
-                            entry.FileName = fileName;
-                            messages.Add(entry);
-                            messagesHandler.AppendMessage(entry, Utils.GetFileNameAsDataSource(fileName));
-                            count++;
-                            messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count, count));
-                        }
+                        var headerMsg = HandleHeaderMessage(line, fileName);
+                        messagesHandler.AppendMessage(headerMsg, Utils.GetFileNameAsDataSource(fileName));
+                        messages.Add(headerMsg);
+                        continue;
                     }
+                    var items = line.Split(splitters, StringSplitOptions.None);
+                    var entry = Parse(items);
+                    entry.FileName = fileName;
+                    messages.Add(entry);
+                    messagesHandler.AppendMessage(entry, Utils.GetFileNameAsDataSource(fileName));
+                    count++;
+                    messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count, count));
                 }
 
                 return messages;
