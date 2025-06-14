@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
 		<TargetFrameworks>net9.0-windows;net8.0-windows;net48</TargetFrameworks>
@@ -18,7 +18,7 @@
 		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="8.1.0" />
 		<PackageReference Include="Analogy.LogViewer.Template" Version="8.1.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="System.Resources.Extensions" Version="9.0.4" />
+		<PackageReference Include="System.Resources.Extensions" Version="9.0.6" />
 	</ItemGroup>
 
 	<ItemGroup>
