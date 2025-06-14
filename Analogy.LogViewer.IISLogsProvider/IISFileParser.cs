@@ -1,5 +1,6 @@
 ﻿using Analogy.Interfaces;
 using Analogy.Interfaces.DataTypes;
+using Analogy.LogViewer.IISLogsProvider.Managers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +16,7 @@ namespace Analogy.LogViewer.IISLogsProvider
         private Dictionary<string, Action<string, AnalogyLogMessage>> ActionMapping;
         private ILogParserSettings _logFileSettings;
         private Dictionary<int, string> columnIndexToName;
+        private string clientIpName = "c-ip";
         private const string fieldHeader = "#Fields:";
         private string[] splitters = [" "];
 
@@ -26,33 +28,51 @@ namespace Analogy.LogViewer.IISLogsProvider
         public IISFileParser(ILogParserSettings logParserSettings)
         {
             _logFileSettings = logParserSettings;
-
-            Mapping = new Dictionary<string, (string Value, string Description)>
-(StringComparer.Ordinal)
+            Mapping = new Dictionary<string, (string Value, string Description)>(StringComparer.Ordinal)
             {
-                { "date", ("Date", "The date on which the activity occurred")},
-                { "time", ("Time", "The time, in coordinated universal time (UTC), at which the activity occurred")},
-                { "c-ip", ("Client IP Address", "The IP address of the client that made the request")},
-                { "cs-username", ("User Name", "The name of the authenticated user who accessed your server. Anonymous users are indicated by a hyphen")},
-                { "s-sitename", ("Service Name and Instance Number", "The Internet service name and instance number that was running on the client")},
-                { "s-computername", ("Server Name", "The name of the server on which the log file entry was generated")},
-                { "s-ip", ("Server IP Address", "The IP address of the server on which the log file entry was generated")},
-                { "s-port", ("Server Port", "The server port number that is configured for the service")},
-                { "cs-method", ("Method", "The requested action, for example, a GET method")},
-                { "cs-uri-stem", ("URI Stem", "The target of the action, for example, Default.htm")},
-                { "cs-uri-query", ("URI Query", "The query, if any that the client was trying to perform. A Universal Resource Identifier (URI) query is necessary only for dynamic pages")},
-                { "sc-status", ("HTTP Status", "The HTTP status code")},
-                { "sc-win32-status", ("Win32 Status", "The Windows status code")},
-                { "sc-bytes", ("Bytes Sent", "The number of bytes that the server sent")},
-                { "cs-bytes", ("Bytes Received", "The number of bytes that the server received")},
-                { "time-taken", ("Time Taken", "The length of time that the action took, in milliseconds")},
-
-                { "cs-version", ("Protocol Version", "The protocol version —HTTP or FTP —that the client used.")},
-                { "cs-host", ("Host", "The host header name, if any")},
-                { "cs(User-Agent)", ("User Agent", "The browser type that the client used")},
-                { "cs(Cookie)", ("Cookie", "The content of the cookie sent or received if any.")},
-                { "cs(Referer)", ("Referer", "The site that the user last visited. This site provided a link to the current site")},
-                { "sc-substatus", ("Protocol Substatus", "The sub status error code")},
+                { "date", ("Date", "The date on which the activity occurred") },
+                { "time", ("Time", "The time, in coordinated universal time (UTC), at which the activity occurred") },
+                { "c-ip", ("Client IP Address", "The IP address of the client that made the request") },
+                {
+                    "cs-username",
+                    ("User Name",
+                        "The name of the authenticated user who accessed your server. Anonymous users are indicated by a hyphen")
+                },
+                {
+                    "s-sitename",
+                    ("Service Name and Instance Number",
+                        "The Internet service name and instance number that was running on the client")
+                },
+                {
+                    "s-computername",
+                    ("Server Name", "The name of the server on which the log file entry was generated")
+                },
+                {
+                    "s-ip",
+                    ("Server IP Address", "The IP address of the server on which the log file entry was generated")
+                },
+                { "s-port", ("Server Port", "The server port number that is configured for the service") },
+                { "cs-method", ("Method", "The requested action, for example, a GET method") },
+                { "cs-uri-stem", ("URI Stem", "The target of the action, for example, Default.htm") },
+                {
+                    "cs-uri-query",
+                    ("URI Query",
+                        "The query, if any that the client was trying to perform. A Universal Resource Identifier (URI) query is necessary only for dynamic pages")
+                },
+                { "sc-status", ("HTTP Status", "The HTTP status code") },
+                { "sc-win32-status", ("Win32 Status", "The Windows status code") },
+                { "sc-bytes", ("Bytes Sent", "The number of bytes that the server sent") },
+                { "cs-bytes", ("Bytes Received", "The number of bytes that the server received") },
+                { "time-taken", ("Time Taken", "The length of time that the action took, in milliseconds") },
+                { "cs-version", ("Protocol Version", "The protocol version —HTTP or FTP —that the client used.") },
+                { "cs-host", ("Host", "The host header name, if any") },
+                { "cs(User-Agent)", ("User Agent", "The browser type that the client used") },
+                { "cs(Cookie)", ("Cookie", "The content of the cookie sent or received if any.") },
+                {
+                    "cs(Referer)",
+                    ("Referer", "The site that the user last visited. This site provided a link to the current site")
+                },
+                { "sc-substatus", ("Protocol Substatus", "The sub status error code") },
             };
 
             ActionMapping = new Dictionary<string, Action<string, AnalogyLogMessage>>
@@ -328,7 +348,7 @@ namespace Analogy.LogViewer.IISLogsProvider
                         continue;
                     }
                     var items = line.Split(splitters, StringSplitOptions.None);
-                    var entry = Parse(items);
+                    var entry = await Parse(items);
                     entry.FileName = fileName;
                     messages.Add(entry);
                     messagesHandler.AppendMessage(entry, Utils.GetFileNameAsDataSource(fileName));
@@ -368,7 +388,7 @@ namespace Analogy.LogViewer.IISLogsProvider
             return m;
         }
 
-        private AnalogyLogMessage Parse(string[] items)
+        private async Task<AnalogyLogMessage> Parse(string[] items)
         {
             AnalogyLogMessage m = new AnalogyLogMessage();
             for (var index = 0; index < items.Length; index++)
@@ -378,6 +398,11 @@ namespace Analogy.LogViewer.IISLogsProvider
                 if (ActionMapping.TryGetValue(field, out var action))
                 {
                     action(value, m);
+                    if (field.Equals(clientIpName) && UserSettingsManager.UserSettings.Settings.UseGeoLocationService)
+                    {
+                        var country = await GeoLocationManager.Instance.GetCountry(value);
+                        m.AddOrReplaceAdditionalProperty("Country", country);
+                    }
                 }
                 else //custom
                 {
