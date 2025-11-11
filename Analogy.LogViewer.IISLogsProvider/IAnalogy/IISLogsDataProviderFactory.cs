@@ -1,4 +1,5 @@
 ﻿using Analogy.Interfaces;
+using Analogy.Interfaces.WinForms;
 using Analogy.LogViewer.IISLogsProvider.IAnalogy;
 using System;
 using System.Collections.Generic;
@@ -8,12 +9,12 @@ using System.Windows.Forms;
 
 namespace Analogy.LogViewer.IISLogsProvider
 {
-    public class IISLogsDataProviderFactory : LogViewer.Template.DataProvidersFactory
+    public class IISLogsDataProviderFactory : LogViewer.Template.DataProvidersFactoryWinForms
     {
         public override Guid FactoryId { get; set; } = IISLogFactory.Id;
         public override string Title { get; set; } = "IIS Logs Data Provider";
 
-        public override IEnumerable<IAnalogyDataProvider> DataProviders { get; set; } = new List<IAnalogyDataProvider> { new AnalogyIISDataProvider() };
+        public override IEnumerable<IAnalogyDataProviderWinForms> DataProviders { get; set; } = new List<IAnalogyDataProviderWinForms> { new AnalogyIISDataProvider() };
     }
 
     public class AnalogyIISUserSettings //: IAnalogyDataProviderSettings

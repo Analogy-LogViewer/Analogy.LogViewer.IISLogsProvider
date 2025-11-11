@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Analogy.LogViewer.IISLogsProvider.IAnalogy
 {
-    public class AnalogyIISDataProvider : Analogy.LogViewer.Template.OfflineDataProvider
+    public class AnalogyIISDataProvider : Analogy.LogViewer.Template.OfflineDataProviderWinForms
     {
         public override string? OptionalTitle { get; set; } = "Analogy IIS Log Parser";
 
