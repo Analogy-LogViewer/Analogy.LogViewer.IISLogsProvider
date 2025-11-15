@@ -1,6 +1,7 @@
 ﻿using Analogy.Interfaces;
 using Analogy.Interfaces.DataTypes;
 using Analogy.LogViewer.Template.Managers;
+using Analogy.LogViewer.Template.WinForms;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Analogy.LogViewer.IISLogsProvider.IAnalogy
 {
-    public class AnalogyIISDataProvider : Analogy.LogViewer.Template.OfflineDataProviderWinForms
+    public class AnalogyIISDataProvider : OfflineDataProviderWinForms
     {
         public override string? OptionalTitle { get; set; } = "Analogy IIS Log Parser";
 

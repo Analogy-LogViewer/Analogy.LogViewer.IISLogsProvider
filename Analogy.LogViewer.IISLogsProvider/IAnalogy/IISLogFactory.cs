@@ -3,13 +3,14 @@ using Analogy.Interfaces.Factories;
 using Analogy.Interfaces.WinForms;
 using Analogy.Interfaces.WinForms.Factories;
 using Analogy.LogViewer.IISLogsProvider.Properties;
+using Analogy.LogViewer.Template.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 
 namespace Analogy.LogViewer.IISLogsProvider
 {
-    public class IISLogFactory : Analogy.LogViewer.Template.PrimaryFactoryWinForms
+    public class IISLogFactory : PrimaryFactoryWinForms
     {
         internal static Guid Id { get; } = new Guid("AD7187B1-BD09-4BFE-A28B-3FD3DE879009");
         public override Guid FactoryId { get; set; } = Id;
@@ -21,12 +22,10 @@ namespace Analogy.LogViewer.IISLogsProvider
         public override Image? SmallImage { get; set; } = Resources.AnalogyIIS16x16;
     }
 
-    public class AnalogyIISLogCustomActionFactory : IAnalogyCustomActionsFactoryWinForms
+    public class AnalogyIISLogCustomActionFactory : CustomActionsFactoryWinForms
     {
-        public Guid FactoryId { get; set; } = IISLogFactory.Id;
-        public string Title { get; set; } = "Analogy IIS Built-In tools";
-        IEnumerable<IAnalogyCustomAction> IAnalogyCustomActionsFactory.Actions => Actions;
-
+        public override Guid FactoryId { get; set; } = IISLogFactory.Id;
+        public override string Title { get; set; } = "Analogy IIS Built-In tools";
         public IEnumerable<IAnalogyCustomActionWinForms> Actions { get; } = new List<IAnalogyCustomActionWinForms>(0);
     }
 }
