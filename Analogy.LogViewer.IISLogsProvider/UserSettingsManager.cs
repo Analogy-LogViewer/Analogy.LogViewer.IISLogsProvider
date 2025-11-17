@@ -16,7 +16,7 @@ namespace Analogy.LogViewer.IISLogsProvider
         private static readonly Lazy<UserSettingsManager> _instance =
              new Lazy<UserSettingsManager>(() => new UserSettingsManager());
         public static UserSettingsManager UserSettings { get; set; } = _instance.Value;
-        private string LocalSettingFileName { get; } = "AnalogyIIsSettings.json";
+        private string LocalSettingFileName { get; } = "AnalogyIISUserSettings.json";
 
         public string IisPerUserFileSetting => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Analogy.LogViewer", LocalSettingFileName);
         public IISUserSettings Settings { get; set; }
